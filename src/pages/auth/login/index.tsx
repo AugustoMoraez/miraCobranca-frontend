@@ -1,5 +1,6 @@
 import {Container,Form, Input,Button,FormContainer, BannerContainer, LogoBanner, Info, TitleForm} from "./style"
 import img from "../../../assets/img/logobanner.png"
+import { Link } from "react-router-dom"
 
 export const LoginPage = () =>{
     const handleSubmit = (e:any) => {
@@ -20,6 +21,7 @@ export const LoginPage = () =>{
             <Input type="email" placeholder="Seu email" required/>
             <Input type="password" placeholder="Sua senha" required />
             <Button type="submit" value="Entrar"/>
+            <Link to={""}>Não possui conta? Registre-se</Link>
           </Form>
 
         </FormContainer>
