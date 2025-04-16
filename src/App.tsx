@@ -1,10 +1,11 @@
 import { Route,Routes } from "react-router-dom"
+import { LoginPage } from "./pages/auth/login"
 
 const App =()=> {
   
   return (
     <Routes>
-      <Route path="" element={} />
+      <Route element={<LoginPage/>} path="/" />
     </Routes>
   )
 }
