@@ -14,7 +14,7 @@ export const LoginPage = () =>{
           <BannerContainer>
             <LogoBanner src={img} alt=""/> 
              
-            <Info>Combata a inadimplência do seu negocio!</Info>
+            {/* <Info>Combata a inadimplência do seu negocio!</Info> */}
           </BannerContainer>
           <Form onSubmit={handleSubmit}>
             <TitleForm>LOGIN</TitleForm>
