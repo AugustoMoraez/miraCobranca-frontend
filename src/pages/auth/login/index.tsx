@@ -1,4 +1,4 @@
-import {Container,Form, Input,Button,FormContainer, BannerContainer, LogoBanner, Info, TitleForm} from "./style"
+import {Container,Form, Input,Button,FormContainer, BannerContainer, LogoBanner,  TitleForm} from "./style"
 import img from "../../../assets/img/logobanner.png"
 import { Link } from "react-router-dom"
 
@@ -14,7 +14,7 @@ export const LoginPage = () =>{
           <BannerContainer>
             <LogoBanner src={img} alt=""/> 
              
-            {/* <Info>Combata a inadimplência do seu negocio!</Info> */}
+           
           </BannerContainer>
           <Form onSubmit={handleSubmit}>
             <TitleForm>LOGIN</TitleForm>

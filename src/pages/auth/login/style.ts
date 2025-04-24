@@ -33,14 +33,7 @@ export const LogoBanner = styled.img`
   padding: 0px 10px;
 `;
 
-
-export const Info = styled.p`
-  color: #0A4634;
-  font-weight: 900;
-  font-size: 30px;
-  padding: 0px 20px;
-  margin-top: -50px;
-`
+ 
 
 export const Form = styled.form`
   display: flex;
