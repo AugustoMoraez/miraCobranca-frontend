@@ -18,21 +18,18 @@ export const Title = styled.h1`
 
 `;
 export const FormContainer = styled.div`
- 
-width: 100%;
-max-width: 500px;
- 
-background-color:rgb(255, 255, 255);
-box-shadow: 5px 5px 20px #333;
-border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 500px;
+  background-color:rgb(255, 255, 255);
+  box-shadow: 5px 5px 20px #333;
+  border-radius: 10px;
 `
 export const ContainerAccountType = styled.div`
   width: 100%;
-   padding: 0px 20px;
-  margin: auto;
   flex-direction: column;
-align-items: center;
-   justify-content: center;
+  align-items: center;
+  justify-content: center;
    
 `;
 export const ContainerAccountTypeInfo = styled.h3`
@@ -42,23 +39,34 @@ export const ContainerAccountTypeInfo = styled.h3`
   text-align: center;
 `;
 
-export const UserType = styled.select`
-margin: auto;
+export const InputOption = styled.select`
+  max-height: 200px; 
+  overflow-y: auto;
+  margin: auto;
   width: 100%;
   padding:15px;
   background-color: #1E7A58;
   color: #fff;
   border-radius: 5px;
   outline: none;
+  &:hover{
+    cursor: pointer;
+    opacity: 0.9;
+  }
 `;
 export const Option = styled.option``;
 
 export const Form = styled.form`
-display: flex;
-flex-direction: column;
-align-items: center;
-   justify-content: center;
+  max-height: 700px;
+  overflow:hidden ;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 10px 20px 20px 20px;
+  .hidden{
+    height: 0px;
+    display: none;
+  }
 `;
 
 
@@ -82,10 +90,35 @@ export const Input = styled.input`
   }
 `
 
+export const Label = styled.label`
+  margin-right: auto;
+  margin-left: 5px;
+  font-size:12px ;
+  color:rgb(108, 108, 108);
+`;
 
-export const Button = styled.input`
-   width: 100%;
+export const NextButton = styled.div`
+  width: 100%;
+  text-align: center;
+  padding:15px;
+  margin: 15px 0px 50px 0px;
   
+  border-radius: 5px;
+  background-color: #1E7A58;
+  outline: none;
+  border: 1px solid #1E7A58;
+  color: #fff;
+
+  
+  &:hover{
+    opacity: 0.9;
+    cursor: pointer;
+  }
+`
+
+export const SubmitButton = styled.input`
+  width: 100%;
+  text-align: center;
   padding:15px;
   margin-bottom: 10px;
   
@@ -101,3 +134,9 @@ export const Button = styled.input`
     cursor: pointer;
   }
 `
+
+export const FormStep = styled.div`
+  max-height: 680px;
+
+`
+ 
