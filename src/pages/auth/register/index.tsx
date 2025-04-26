@@ -6,9 +6,13 @@ import { registerFormSchema, registerFormType } from "../../../schemas/registerU
 import { states } from "../../../utils/states";
 export const RegisterPage = () => {
     const [option, setOption] = useState("Person");
-
+    const [selectedState, setSelectedState] = useState("");
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setOption(event.target.value);
+        if(event.target.id ==="accountType"){
+            setOption(event.target.value);
+        }else{
+            setSelectedState(event.target.value);
+        }
     };
 
     const {
@@ -35,10 +39,10 @@ export const RegisterPage = () => {
             <FormContainer>
 
                 <Form onSubmit={handleSubmit(onSubmit)}>
-                    <FormStep className="hidden">
+                    <FormStep className="">
                         <ContainerAccountType>
                             <ContainerAccountTypeInfo>Qual seu perfil?</ContainerAccountTypeInfo>
-                            <InputOption id="alternativa" value={option} onChange={handleChange}>
+                            <InputOption id="accountType" value={option} onChange={handleChange}>
                                 <Option value="Person">Pessoa</Option>
                                 <Option value="Enterprise">Empresa</Option>
                             </InputOption>
