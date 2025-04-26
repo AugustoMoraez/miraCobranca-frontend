@@ -39,7 +39,7 @@ export const RegisterPage = () => {
             <FormContainer>
 
                 <Form onSubmit={handleSubmit(onSubmit)}>
-                    <FormStep className="">
+                    <FormStep className="hidden">
                         <ContainerAccountType>
                             <ContainerAccountTypeInfo>Qual seu perfil?</ContainerAccountTypeInfo>
                             <InputOption id="accountType" value={option} onChange={handleChange}>
@@ -94,7 +94,7 @@ export const RegisterPage = () => {
 
                         <NextButton>Proximo</NextButton>
                     </FormStep>
-                    <FormStep>
+                    <FormStep className="">
                         <Label htmlFor="state-option">Estado</Label>
                         <InputOption id="state-options" value={option} onChange={handleChange}>
                             {
