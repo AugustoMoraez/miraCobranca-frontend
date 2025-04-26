@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Container, FormContainer, Form, ContainerAccountType, ContainerAccountTypeInfo, Title,  Option, Input, SubmitButton, NextButton, Label,  FormStep, InputOption } from "./style";
+import { Container,BackForm, FormContainer, Form, ContainerAccountType, ContainerAccountTypeInfo, Title,  Option, Input, SubmitButton, NextButton, Label,  FormStep, InputOption } from "./style";
 import { registerFormSchema, registerFormType } from "../../../schemas/registerUser.schema";
 import { states } from "../../../utils/states";
 export const RegisterPage = () => {
     const [option, setOption] = useState("Person");
     const [selectedState, setSelectedState] = useState("");
+    const [stepHidden, setStepHidden] = useState<"1"|"2">("1");
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         if(event.target.id ==="accountType"){
             setOption(event.target.value);
@@ -28,18 +29,21 @@ export const RegisterPage = () => {
 
 
     const onSubmit = (data: registerFormType) => {
-        console.log(option, data);
+        console.log(selectedState,option, data);
     };
 
 
 
     return (
         <Container>
-            <Title>Registro de conta</Title>
+            <Title>
+                {stepHidden == "1" ? "Registro de conta" : "Endereço" }
+                
+            </Title>
             <FormContainer>
 
                 <Form onSubmit={handleSubmit(onSubmit)}>
-                    <FormStep className="hidden">
+                    <FormStep className={stepHidden == "2" ? "hidden": ""}>
                         <ContainerAccountType>
                             <ContainerAccountTypeInfo>Qual seu perfil?</ContainerAccountTypeInfo>
                             <InputOption id="accountType" value={option} onChange={handleChange}>
@@ -92,9 +96,10 @@ export const RegisterPage = () => {
                         <Input placeholder="Confirmar senha" type="password" id="confirmar senha"{...register("confirmPassword")} />
                         {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
 
-                        <NextButton>Proximo</NextButton>
+                        <NextButton onClick={()=>setStepHidden("2")}>Proximo</NextButton>
                     </FormStep>
-                    <FormStep className="">
+                    <FormStep className={stepHidden == "1" ? "hidden": ""}>
+                        <BackForm onClick={()=>setStepHidden("1")}>Voltar</BackForm>
                         <Label htmlFor="state-option">Estado</Label>
                         <InputOption id="state-options" value={option} onChange={handleChange}>
                             {

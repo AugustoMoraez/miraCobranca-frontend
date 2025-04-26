@@ -177,4 +177,12 @@ export const FormStep = styled.div`
   max-height: 680px;
 
 `
+export const BackForm = styled.p`
+  
+  font-size:15px ;
+  cursor: pointer;
+  color:#1E7A58;
+  font-weight: bold;
+`;
+
  
