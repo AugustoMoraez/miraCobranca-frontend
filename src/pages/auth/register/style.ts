@@ -37,14 +37,14 @@ export const FormContainer = styled.div`
     max-width: 100%;
   }
 `;
-export const ContainerAccountType = styled.div`
+export const AccountType = styled.div`
   width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
    
 `;
-export const ContainerAccountTypeInfo = styled.h3`
+export const AccountTypeInfo = styled.h3`
   color: #1E7A58;
   font-weight: lighter;
   margin: 10px 0px;
