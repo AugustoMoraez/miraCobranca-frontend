@@ -62,10 +62,10 @@ export const registerFormSchema = z.object({
   password: z.string().min(6, 'A senha deve ter no mínimo 6 caracteres'),
   confirmEmail: z.string().email("Email inválido"),
   confirmPassword: z.string().min(6, "Mínimo 6 caracteres"),
-  name: z.string(),
+  name: z.string().min(2,"Nome obrigatório"),
   cnpj: cnpj.optional(),
   cpf: cpf.optional(),
-  contact_1: z.string().min(1, 'O contato 1 é obrigatório'),
+  contact_1: z.string().min(1, 'O contato é obrigatório'),
   contact_2: z.string().optional(),
   address: AddressSchema.optional(),  
 }).refine((data) => data.email === data.confirmEmail, {

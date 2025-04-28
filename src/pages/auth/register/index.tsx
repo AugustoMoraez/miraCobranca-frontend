@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Container, FormContainer, Form,  Title,  } from "./style";
@@ -12,6 +12,8 @@ export const RegisterPage = () => {
     const formHook = useForm<registerFormType>({
         resolver: zodResolver(registerFormSchema),
     });
+
+    
 
     const onSubmit = (data: registerFormType) => {
         console.log( data);
@@ -27,7 +29,7 @@ export const RegisterPage = () => {
 
                     <StepOne 
                     formHooK={formHook} 
-                    func={()=> setStepHidden("2")} 
+                    func={(step )=> setStepHidden(step)} 
                     stepHidden={stepHidden} />
                     
                     <StepTwo 

@@ -1,13 +1,13 @@
 import { UseFormReturn } from "react-hook-form";
-import { AccountType, AccountTypeInfo, FormStep, Input, InputOption, Label, NextButton ,Option} from "../style";
+import { AccountType, AccountTypeInfo, FormStep, Input, InputOption,SpanErro, Label, NextButton ,Option} from "../style";
 import { registerFormType } from "../../../../schemas/registerUser.schema";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 type StepOneData = {
     formHooK: UseFormReturn<registerFormType>,
     stepHidden: "1" | "2",
-    func:()=>void
+    func:(step:"1"|"2")=>void
 }
 
 
@@ -16,24 +16,30 @@ export const StepOne = ({formHooK,stepHidden,func}:StepOneData) => {
     const handleAccountTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setOption(event.target.value as "cpf" | "cnpj");
     };
+
     const {
         register,
         formState: { errors }
     } = formHooK;
+
+    useEffect(()=>func("1"),[
+     errors.name,errors.cpf,errors.cnpj,errors.password,
+     errors.confirmPassword,errors.email,errors.confirmEmail   
+    ])
 
     return (
         <FormStep className={stepHidden == "2" ? "hidden" : ""}>
             <AccountType>
                 <AccountTypeInfo>Qual seu perfil?</AccountTypeInfo>
                 <InputOption id="accountType" value={option} onChange={handleAccountTypeChange}>
-                    <Option value="cpf">Pessoa</Option>
-                    <Option value="cnpj">Empresa</Option>
+                    <Option value="cpf" id="1">Pessoa</Option>
+                    <Option value="cnpj" id="2">Empresa</Option>
                 </InputOption>
             </AccountType>
 
             <Label htmlFor="name">{option == "cpf" ? "Nome" : "Razão Social"}</Label>
             <Input placeholder={option == "cpf" ? "Nome" : "Razão Social"} id="name" {...register("name")} />
-            {errors.name && <span>{errors.name.message}</span>}
+            {errors.name && <SpanErro>{errors.name.message}</SpanErro>}
 
             <Label htmlFor={option == "cpf" ? "CPF" : "CNPJ"}>
                 {option == "cpf" ? "CPF" : "CNPJ"}
@@ -42,26 +48,26 @@ export const StepOne = ({formHooK,stepHidden,func}:StepOneData) => {
                 placeholder={option == "cpf" ? "CPF" : "CNPJ"}
                 id={option == "cpf" ? "CPF" : "CNPJ"}
                 {...register(option)} />
-            {option === "cpf" && errors.cpf && <span>{errors.cpf.message}</span>}
-            {option === "cnpj" && errors.cnpj && <span>{errors.cnpj.message}</span>}
+            {option === "cpf" && errors.cpf && <SpanErro>{errors.cpf.message}</SpanErro>}
+            {option === "cnpj" && errors.cnpj && <SpanErro>{errors.cnpj.message}</SpanErro>}
 
             <Label htmlFor="Email">Email</Label>
             <Input placeholder="Email" id="Email" {...register("email")} />
-            {errors.email && <span>{errors.email.message}</span>}
+            {errors.email && <SpanErro>{errors.email.message}</SpanErro>}
 
             <Label htmlFor="Confirmar Email">Confirmar Email</Label>
             <Input placeholder="Confirmar email" id="Confirmar Email" {...register("confirmEmail")} />
-            {errors.confirmEmail && <span>{errors.confirmEmail.message}</span>}
+            {errors.confirmEmail && <SpanErro>{errors.confirmEmail.message}</SpanErro>}
 
             <Label htmlFor="senha">Senha</Label>
             <Input placeholder="Senha" type="password" id="senha" {...register("password")} />
-            {errors.password && <span>{errors.password.message}</span>}
+            {errors.password && <SpanErro>{errors.password.message}</SpanErro>}
 
             <Label htmlFor="confirmar senha">Confirmar Senha</Label>
             <Input placeholder="Confirmar senha" type="password" id="confirmar senha"{...register("confirmPassword")} />
-            {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
+            {errors.confirmPassword && <SpanErro>{errors.confirmPassword.message}</SpanErro>}
 
-            <NextButton onClick={() => func()}>Proximo</NextButton>
+            <NextButton onClick={() => func("2")}>Proximo</NextButton>
         </FormStep>
     )
 }

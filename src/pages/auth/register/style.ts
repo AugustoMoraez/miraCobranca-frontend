@@ -5,7 +5,6 @@ export const Container = styled.div`
   height: 100vh;
   width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
   padding: 20px;
@@ -24,13 +23,13 @@ export const Title = styled.h1`
   }
 `;
 export const FormContainer = styled.div`
-  overflow: hidden;
+  
   width: 100%;
   max-width: 500px;
   background-color: rgb(255, 255, 255);
   box-shadow: 5px 5px 20px #333;
   border-radius: 10px;
-
+   
   @media (max-width: 480px) {
     box-shadow: none;
     border-radius: 0;
@@ -78,13 +77,12 @@ export const InputOption = styled.select`
 export const Option = styled.option``;
 
 export const Form = styled.form`
-  max-height: 700px;
-  overflow: hidden;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 10px 20px 20px 20px;
-
+  
   .hidden {
     height: 0px;
     display: none;
@@ -99,7 +97,7 @@ export const Form = styled.form`
 export const Input = styled.input`
   width: 100%;
   padding: 15px;
-  margin-bottom: 10px;
+  
   border-radius: 5px;
   background: none;
   outline: none;
@@ -125,6 +123,7 @@ export const Input = styled.input`
 export const Label = styled.label`
   margin-right: auto;
   margin-left: 5px;
+  margin-top: 10px;
   font-size:12px ;
   color:rgb(108, 108, 108);
 `;
@@ -132,7 +131,7 @@ export const NextButton = styled.div`
   width: 100%;
   text-align: center;
   padding: 15px;
-  margin: 15px 0px 50px 0px;
+  margin: 15px 0px 5px 0px;
   border-radius: 5px;
   background-color: #1E7A58;
   outline: none;
@@ -174,7 +173,8 @@ export const SubmitButton = styled.input`
 `;
 
 export const FormStep = styled.div`
-  max-height: 680px;
+  height: auto;
+  width: 100%;
 
 `
 export const BackForm = styled.p`
@@ -185,4 +185,11 @@ export const BackForm = styled.p`
   font-weight: bold;
 `;
 
- 
+ export const SpanErro = styled.p`
+  margin-right: auto;
+  margin-left: 5px;
+   
+  font-size:12px ;
+  color:rgb(255, 101, 101);
+
+  `
