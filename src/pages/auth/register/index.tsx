@@ -6,10 +6,14 @@ import { registerFormSchema, registerFormType } from "../../../schemas/registerU
 import { StepOne } from "./steps/stepOne";
 import { StepTwo } from "./steps/stepTwo";
 import { usePost } from "../../../services/usePost";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../../redux/slices/user";
+import { useNavigate } from "react-router-dom";
 
 export const RegisterPage = () => {
     const [stepHidden, setStepHidden] = useState<"1"|"2">("1");
-     
+    const dispatch = useDispatch();
+    const nav = useNavigate()
     const formHook = useForm<registerFormType>({
         resolver: zodResolver(registerFormSchema),
     });
@@ -20,6 +24,8 @@ export const RegisterPage = () => {
         register(data, {
             onSuccess: (res) => {
               console.log("registro bem-sucedido:", res)
+              dispatch(setUser(res))
+              nav("/dashboard")  
             },
             onError: (err: any) => {
               console.error("Erro no registro:", err.response?.data?.message || err.message)
