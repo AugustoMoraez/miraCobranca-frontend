@@ -5,6 +5,7 @@ import { Container, FormContainer, Form,  Title,  } from "./style";
 import { registerFormSchema, registerFormType } from "../../../schemas/registerUser.schema";
 import { StepOne } from "./steps/stepOne";
 import { StepTwo } from "./steps/stepTwo";
+import { usePost } from "../../../services/usePost";
 
 export const RegisterPage = () => {
     const [stepHidden, setStepHidden] = useState<"1"|"2">("1");
@@ -13,10 +14,18 @@ export const RegisterPage = () => {
         resolver: zodResolver(registerFormSchema),
     });
 
-    
+    const {mutate:register} = usePost<registerFormType>("/user/register")
 
     const onSubmit = (data: registerFormType) => {
-        console.log( data);
+        register(data, {
+            onSuccess: (res) => {
+              console.log("registro bem-sucedido:", res)
+            },
+            onError: (err: any) => {
+              console.error("Erro no registro:", err.response?.data?.message || err.message)
+              alert(err.response?.data?.message || "Erro ao fazer registro")
+            },
+          })
     };
 
     return (

@@ -4,10 +4,13 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Container, Form, Input, Button, FormContainer, BannerContainer, LogoBanner, TitleForm } from "./style"
 import img from "../../../assets/img/logobanner.png"
 import { Link } from "react-router-dom"
-import { useLogin } from "./useLogin"
+import { usePost } from "../../../services/usePost"
 
  
-
+type LoginData = {
+  email: string
+  password: string
+}
 
 export const LoginPage = () => {
   const {
@@ -18,7 +21,7 @@ export const LoginPage = () => {
     resolver: zodResolver(loginSchema),
   })
 
-  const { mutate: login, isPending } = useLogin()
+  const { mutate: login } = usePost<LoginData>("/auth/login")
 
   const onSubmit = (data: LoginFormDataType) => {
     login(data, {
