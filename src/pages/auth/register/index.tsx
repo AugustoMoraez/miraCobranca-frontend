@@ -9,6 +9,7 @@ import { usePost } from "../../../services/usePost";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../redux/slices/user";
 import { useNavigate } from "react-router-dom";
+import { Loading } from "../../../components/load/register";
 
 export const RegisterPage = () => {
     const [stepHidden, setStepHidden] = useState<"1"|"2">("1");
@@ -18,7 +19,7 @@ export const RegisterPage = () => {
         resolver: zodResolver(registerFormSchema),
     });
 
-    const {mutate:register} = usePost<registerFormType>("/user/register")
+    const {mutate:register,isPending} = usePost<registerFormType>("/user/register")
 
     const onSubmit = (data: registerFormType) => {
         register(data, {
@@ -35,25 +36,28 @@ export const RegisterPage = () => {
     };
 
     return (
-        <Container>
-            <Title>
-                {stepHidden == "1" ? "Registro de conta" : "Endereço" }                
-            </Title>
-            <FormContainer>
-                <Form onSubmit={formHook.handleSubmit(onSubmit)}>
+        <>
+            {isPending && <Loading msg="Registrando" />}
+            <Container>
+                <Title>
+                    {stepHidden == "1" ? "Registro de conta" : "Endereço" }                
+                </Title>
+                <FormContainer>
+                    <Form onSubmit={formHook.handleSubmit(onSubmit)}>
 
-                    <StepOne 
-                    formHooK={formHook} 
-                    func={(step )=> setStepHidden(step)} 
-                    stepHidden={stepHidden} />
-                    
-                    <StepTwo 
-                    formHooK={formHook} 
-                    func={()=> setStepHidden("1")} 
-                    stepHidden={stepHidden} />
-                    
-                </Form>
-            </FormContainer>
-        </Container>
+                        <StepOne 
+                        formHooK={formHook} 
+                        func={(step )=> setStepHidden(step)} 
+                        stepHidden={stepHidden} />
+                        
+                        <StepTwo 
+                        formHooK={formHook} 
+                        func={()=> setStepHidden("1")} 
+                        stepHidden={stepHidden} />
+                        
+                    </Form>
+                </FormContainer>
+            </Container>
+        </>
     );
 };

@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { usePost } from "../../../services/usePost"
 import { useDispatch } from "react-redux"
 import { setUser } from "../../../redux/slices/user"
+import { SpanErro } from "../register/style"
 
  
 type LoginData = {
@@ -25,7 +26,7 @@ export const LoginPage = () => {
 
   const dispatch = useDispatch();
   const nav = useNavigate()
-  const { mutate: login } = usePost<LoginData>("/auth/login")
+  const { mutate: login,error } = usePost<LoginData>("/auth/login")
 
   const onSubmit = (data: LoginFormDataType) => {
     login(data, {
@@ -35,7 +36,7 @@ export const LoginPage = () => {
         nav("/dashboard")  
       },
       onError: (err: any) => {
-        console.error("Erro no login:", err.response?.data?.message || err.message)
+        console.error("Erro no login:", err.response?.data?.message || err.message,error?.message)
         alert(err.response?.data?.message || "Erro ao fazer login")
       },
     })
@@ -51,11 +52,11 @@ export const LoginPage = () => {
         <Form onSubmit={handleSubmit(onSubmit)}>
           <TitleForm>LOGIN</TitleForm>
 
+          {errors.email && <SpanErro style={{margin:"0px auto" }}>{errors.email.message}</SpanErro>}
           <Input type="email" placeholder="Seu email" {...register("email")} />
-          {errors.email && <span style={{ color: "red" }}>{errors.email.message}</span>}
 
+          {errors.password && <SpanErro style={{margin:"0px auto" }}>{errors.password.message}</SpanErro>}
           <Input type="password" placeholder="Sua senha" {...register("password")} />
-          {errors.password && <span style={{ color: "red" }}>{errors.password.message}</span>}
 
           <Button type="submit" value="Entrar" />
           <Link to={"/register"}>Não possui conta? Registre-se</Link>

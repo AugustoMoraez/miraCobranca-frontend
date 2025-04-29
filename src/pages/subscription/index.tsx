@@ -4,12 +4,14 @@ import { IoDocumentTextOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa6";
 import { TbDiscount } from "react-icons/tb";
 import { JSX } from "react";
+import {Loading} from "../../components/load/register";
 
 export const SubscriptionPage =()=>{
     type Item = {
         icon:JSX.Element,
         content:string
     }
+    const load = true
     const contentItem:Item[] =[
         {icon:<FaCreditCard/>,content:"Crie cobrancas recorrentes ilimitadas via cartão de crédito."},
         {icon:<IoDocumentTextOutline/>,content:"Tenha acesso a relatorios detalhados sobre seus recebimentos."},
@@ -17,8 +19,12 @@ export const SubscriptionPage =()=>{
         {icon:<TbDiscount/>,content:"Taxa de 3,99% + 0,39 centavos por cobrança."}
     ]
 
-
+    
     return(
+        <>
+        
+        {load && <Loading msg="Aguarde..."/>}
+        
         <Container>
             <Card>
                 <div>
@@ -37,5 +43,6 @@ export const SubscriptionPage =()=>{
                 <Button>Comece agora</Button>
             </Card>
         </Container>
+        </>
     )
 }

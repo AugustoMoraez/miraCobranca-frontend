@@ -154,6 +154,7 @@ export const SubmitButton = styled.input`
   width: 100%;
   text-align: center;
   padding: 15px;
+  margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
   background-color: #1E7A58;
