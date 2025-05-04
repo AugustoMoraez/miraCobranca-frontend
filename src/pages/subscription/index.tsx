@@ -4,45 +4,52 @@ import { IoDocumentTextOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa6";
 import { TbDiscount } from "react-icons/tb";
 import { JSX } from "react";
-import {Loading} from "../../components/load/register";
+import { Loading } from "../../components/load/register";
+import { ModalErro } from "../../components/modal/erro";
+import { PrivateRoute } from "../auth/components/privateRoute";
 
-export const SubscriptionPage =()=>{
+export const SubscriptionPage = () => {
     type Item = {
-        icon:JSX.Element,
-        content:string
+        icon: JSX.Element,
+        content: string
     }
-    const load = true
-    const contentItem:Item[] =[
-        {icon:<FaCreditCard/>,content:"Crie cobrancas recorrentes ilimitadas via cartão de crédito."},
-        {icon:<IoDocumentTextOutline/>,content:"Tenha acesso a relatorios detalhados sobre seus recebimentos."},
-        {icon:<FaRegUser/>,content:"Cadastre e gerencie seus clientes com facilidade."},
-        {icon:<TbDiscount/>,content:"Taxa de 3,99% + 0,39 centavos por cobrança."}
+    const load = false
+    const err = true
+    const contentItem: Item[] = [
+        { icon: <FaCreditCard />, content: "Crie cobrancas recorrentes ilimitadas via cartão de crédito." },
+        { icon: <IoDocumentTextOutline />, content: "Tenha acesso a relatorios detalhados sobre seus recebimentos." },
+        { icon: <FaRegUser />, content: "Cadastre e gerencie seus clientes com facilidade." },
+        { icon: <TbDiscount />, content: "Taxa de 3,99% + 0,39 centavos por cobrança." }
     ]
 
-    
-    return(
-        <>
-        
-        {load && <Loading msg="Aguarde..."/>}
-        
-        <Container>
-            <Card>
-                <div>
-                <Title>Plano Premium</Title>
-                <Caption>R$99,99/mês</Caption>
-                </div>
-                {
-                    contentItem.map((item,index)=>(
 
-                        <Item key={index}>
-                            <Icon>{item.icon}</Icon>
-                            <Content>{item.content}</Content>
-                        </Item>
-                    ))
-                }
-                <Button>Comece agora</Button>
-            </Card>
-        </Container>
-        </>
+    return (
+        <PrivateRoute>
+            <>
+
+                {load && <Loading msg="Aguarde..." />}
+                {err && <ModalErro msg="Aguarde..." />}
+
+
+                <Container>
+                    <Card>
+                        <div>
+                            <Title>Plano Premium</Title>
+                            <Caption>R$99,99/mês</Caption>
+                        </div>
+                        {
+                            contentItem.map((item, index) => (
+
+                                <Item key={index}>
+                                    <Icon>{item.icon}</Icon>
+                                    <Content>{item.content}</Content>
+                                </Item>
+                            ))
+                        }
+                        <Button>Comece agora</Button>
+                    </Card>
+                </Container>
+            </>
+        </PrivateRoute>
     )
 }

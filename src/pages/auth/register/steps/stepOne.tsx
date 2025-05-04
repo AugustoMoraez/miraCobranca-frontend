@@ -41,15 +41,28 @@ export const StepOne = ({formHooK,stepHidden,func}:StepOneData) => {
             <Input placeholder={option == "cpf" ? "Nome" : "Razão Social"} id="name" {...register("name")} />
             {errors.name && <SpanErro>{errors.name.message}</SpanErro>}
 
-            <Label htmlFor={option == "cpf" ? "CPF" : "CNPJ"}>
+            <Label htmlFor={option}>
                 {option == "cpf" ? "CPF" : "CNPJ"}
             </Label>
-            <Input
-                placeholder={option == "cpf" ? "CPF" : "CNPJ"}
-                id={option == "cpf" ? "CPF" : "CNPJ"}
-                {...register(option)} />
-            {option === "cpf" && errors.cpf && <SpanErro>{errors.cpf.message}</SpanErro>}
-            {option === "cnpj" && errors.cnpj && <SpanErro>{errors.cnpj.message}</SpanErro>}
+            {
+                option === "cnpj" ?
+                <>
+                    <Input
+                        placeholder={"CNPJ"}
+                        id={"CNPJ"}
+                        {...register("cnpj")} />
+                    {option === "cnpj" && <SpanErro>{errors.cnpj?.message}</SpanErro>}
+                
+                </>
+                :
+                <>
+                    <Input
+                        placeholder={"cpf"}
+                        id={"cpf"}
+                        {...register("cpf")} />
+                    {option === "cpf" && <SpanErro>{errors.cpf?.message}</SpanErro>}
+                </>
+            }
 
             <Label htmlFor="Email">Email</Label>
             <Input placeholder="Email" id="Email" {...register("email")} />
@@ -64,7 +77,7 @@ export const StepOne = ({formHooK,stepHidden,func}:StepOneData) => {
             {errors.password && <SpanErro>{errors.password.message}</SpanErro>}
 
             <Label htmlFor="confirmar senha">Confirmar Senha</Label>
-            <Input placeholder="Confirmar senha" type="password" id="confirmar senha"{...register("confirmPassword")} />
+            <Input placeholder="Confirmar senha" type="password" id="confirmar senha" {...register("confirmPassword")} />
             {errors.confirmPassword && <SpanErro>{errors.confirmPassword.message}</SpanErro>}
 
             <NextButton onClick={() => func("2")}>Proximo</NextButton>
