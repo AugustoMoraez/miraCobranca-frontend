@@ -1,73 +1,68 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Container, FormContainer, Form,  Title,  } from "./style";
+import { Container, FormContainer, Form, Title, } from "./style";
 import { registerFormSchema, registerFormType } from "../../../schemas/registerUser.schema";
 import { StepOne } from "./steps/stepOne";
 import { StepTwo } from "./steps/stepTwo";
 import { usePost } from "../../../services/usePost";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../../redux/slices/user";
+import { setUser } from "../../../redux/slices/user/user";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "../../../components/load/register";
 import { ModalErro } from "../../../components/modal/erro";
 
 export const RegisterPage = () => {
-    const [stepHidden, setStepHidden] = useState<"1"|"2">("1");
-    const [msgErro, setMsgErro] = useState<string>("");
-    const dispatch = useDispatch();
-    const nav = useNavigate()
-    const formHook = useForm<registerFormType>({
-        resolver: zodResolver(registerFormSchema),
+  const [stepHidden, setStepHidden] = useState<"1" | "2">("1");
+  const [msgErro, setMsgErro] = useState<string>("");
+  const dispatch = useDispatch();
+  const nav = useNavigate()
+  const formHook = useForm<registerFormType>({
+    resolver: zodResolver(registerFormSchema),
+  });
+
+  const { mutate: register, isPending, isError } = usePost<registerFormType>("/user/register")
+
+  const onSubmit = (data: registerFormType) => {
+    register(data, {
+      onSuccess: (res) => {
+        console.log("registro bem-sucedido:", res);
+        dispatch(setUser(res));
+        nav("/subscription");
+
+      },
+      onError: (err: any) => {
+        console.error("Erro no registro:", err.response?.data?.message);
+        setStepHidden("1");
+        setMsgErro(err.response?.data?.message || "Erro interno: Tente novamente mais tarde");
+      },
     });
+  };
 
-    const {mutate:register,isPending,isError} = usePost<registerFormType>("/user/register")
+  return (
+    <>
+      {isPending && <Loading msg="Registrando" />}
+      {isError && <ModalErro msg={msgErro} />}
+      <Container>
+        <Title>
+          {stepHidden == "1" ? "Registro de conta" : "Endereço"}
+        </Title>
+        <FormContainer>
+          <Form onSubmit={formHook.handleSubmit(onSubmit)}>
 
-    const onSubmit = (data: registerFormType) => {
-        register(data, {
-            onSuccess: (res) => {
-              console.log("registro bem-sucedido:", res)
-              dispatch(setUser(res))
-              nav("/dashboard")  
-            },
-            onError: (err: any) => {
-              console.error("Erro no registro:", err.response?.data?.message )
-              if(err.response?.data?.message){
-                setStepHidden("1")
-                setMsgErro(err.response.data.message)
-              }else{
-                setMsgErro("Erro interno: Tente novamente mais tarde")
-              }
-               
-              
-            },
-          })
-    };
+            <StepOne
+              formHooK={formHook}
+              func={(step) => setStepHidden(step)}
+              stepHidden={stepHidden} />
 
-    return (
-        <>
-            {isPending && <Loading msg="Registrando" />}
-            {isError && <ModalErro msg={msgErro} />}
-            <Container>
-                <Title>
-                    {stepHidden == "1" ? "Registro de conta" : "Endereço" }                
-                </Title>
-                <FormContainer>
-                    <Form onSubmit={formHook.handleSubmit(onSubmit)}>
+            <StepTwo
+              formHooK={formHook}
+              func={() => setStepHidden("1")}
+              stepHidden={stepHidden} />
 
-                        <StepOne 
-                        formHooK={formHook} 
-                        func={(step )=> setStepHidden(step)} 
-                        stepHidden={stepHidden} />
-                        
-                        <StepTwo 
-                        formHooK={formHook} 
-                        func={()=> setStepHidden("1")} 
-                        stepHidden={stepHidden} />
-                        
-                    </Form>
-                </FormContainer>
-            </Container>
-        </>
-    );
+          </Form>
+        </FormContainer>
+      </Container>
+    </>
+  );
 };

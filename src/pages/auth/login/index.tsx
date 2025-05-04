@@ -6,7 +6,7 @@ import img from "../../../assets/img/logobanner.png"
 import { Link, useNavigate } from "react-router-dom"
 import { usePost } from "../../../services/usePost"
 import { useDispatch } from "react-redux"
-import { setUser } from "../../../redux/slices/user"
+import { setUser } from "../../../redux/slices/user/user"
 import { SpanErro } from "../register/style"
 
  

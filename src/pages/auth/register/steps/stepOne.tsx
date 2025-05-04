@@ -1,7 +1,7 @@
 import { UseFormReturn } from "react-hook-form";
-import { AccountType, AccountTypeInfo, FormStep, Input, InputOption,SpanErro, Label, NextButton ,Option} from "../style";
+import {   FormStep, Input, SpanErro, Label, NextButton } from "../style";
 import { registerFormType } from "../../../../schemas/registerUser.schema";
-import { useEffect, useState } from "react";
+ 
 
 
 type StepOneData = {
@@ -12,57 +12,32 @@ type StepOneData = {
 
 
 export const StepOne = ({formHooK,stepHidden,func}:StepOneData) => {
-    const [option, setOption] = useState<"cpf" | "cnpj">("cpf");
-    const handleAccountTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setOption(event.target.value as "cpf" | "cnpj");
-    };
-
+     
     const {
         register,
         formState: { errors }
     } = formHooK;
 
-    useEffect(()=>func("1"),[
-     errors.name,errors.cpf,errors.cnpj,errors.password,
-     errors.confirmPassword,errors.email,errors.confirmEmail   
-    ])
+    const nextStep = () => {
+        formHooK.trigger([
+            "name", "cpf", "password", "confirmPassword", "email", "confirmEmail"
+        ]).then((isValid) => {
+            if(isValid){
+                setTimeout(() => func("2"), 0);
+            }
+        });
+    }
 
     return (
         <FormStep className={stepHidden == "2" ? "hidden" : ""}>
-            <AccountType>
-                <AccountTypeInfo>Qual seu perfil?</AccountTypeInfo>
-                <InputOption id="accountType" value={option} onChange={handleAccountTypeChange}>
-                    <Option value="cpf" id="1">Pessoa</Option>
-                    <Option value="cnpj" id="2">Empresa</Option>
-                </InputOption>
-            </AccountType>
-
-            <Label htmlFor="name">{option == "cpf" ? "Nome" : "Razão Social"}</Label>
-            <Input placeholder={option == "cpf" ? "Nome" : "Razão Social"} id="name" {...register("name")} />
+         
+            <Label htmlFor="name">Nome</Label>
+            <Input placeholder={"Nome"} id="name" {...register("name")} />
             {errors.name && <SpanErro>{errors.name.message}</SpanErro>}
 
-            <Label htmlFor={option}>
-                {option == "cpf" ? "CPF" : "CNPJ"}
-            </Label>
-            {
-                option === "cnpj" ?
-                <>
-                    <Input
-                        placeholder={"CNPJ"}
-                        id={"CNPJ"}
-                        {...register("cnpj")} />
-                    {option === "cnpj" && <SpanErro>{errors.cnpj?.message}</SpanErro>}
-                
-                </>
-                :
-                <>
-                    <Input
-                        placeholder={"cpf"}
-                        id={"cpf"}
-                        {...register("cpf")} />
-                    {option === "cpf" && <SpanErro>{errors.cpf?.message}</SpanErro>}
-                </>
-            }
+            <Label htmlFor={"cpf"}>CPF</Label>
+            <Input placeholder={"cpf"} id={"cpf"} {...register("cpf")} />
+            {errors.cpf && <SpanErro>{errors.cpf?.message}</SpanErro>}
 
             <Label htmlFor="Email">Email</Label>
             <Input placeholder="Email" id="Email" {...register("email")} />
@@ -80,7 +55,7 @@ export const StepOne = ({formHooK,stepHidden,func}:StepOneData) => {
             <Input placeholder="Confirmar senha" type="password" id="confirmar senha" {...register("confirmPassword")} />
             {errors.confirmPassword && <SpanErro>{errors.confirmPassword.message}</SpanErro>}
 
-            <NextButton onClick={() => func("2")}>Proximo</NextButton>
+            <NextButton onClick={nextStep}>Proximo</NextButton>
         </FormStep>
     )
 }
