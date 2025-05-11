@@ -3,6 +3,8 @@ import { LoginPage } from "./pages/auth/login"
 import { RegisterPage } from "./pages/auth/register"
 import { SubscriptionPage } from "./pages/subscription"
 import { DashboardPage } from "./pages/dashboard"
+import { VerifyAccountPage } from "./pages/auth/verification/verify-account"
+import { RequestVerifyAccountPage } from "./pages/auth/verification/request-verification"
 
 const App =()=> {
   
@@ -12,6 +14,8 @@ const App =()=> {
       <Route element={<DashboardPage/>} path="/dashboard" />
       <Route element={<RegisterPage/>} path="/register" />
       <Route element={<SubscriptionPage/>} path="/subscription" />
+      <Route element={<RequestVerifyAccountPage/>} path="/request-verify-account" />
+      <Route element={<VerifyAccountPage/>} path="/verify-account" />
     </Routes>
   )
 }

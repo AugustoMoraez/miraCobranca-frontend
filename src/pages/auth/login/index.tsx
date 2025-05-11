@@ -4,10 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Container, Form, Input, Button, FormContainer, BannerContainer, LogoBanner, TitleForm } from "./style"
 import img from "../../../assets/img/logobanner.png"
 import { Link, useNavigate } from "react-router-dom"
-import { usePost } from "../../../services/usePost"
+import { usePostMutation } from "../../../services/usePost"
 import { useDispatch } from "react-redux"
 import { setUser } from "../../../redux/slices/user/user"
 import { SpanErro } from "../register/style"
+import { Loading } from "../../../components/load/register"
 
  
 type LoginData = {
@@ -26,7 +27,7 @@ export const LoginPage = () => {
 
   const dispatch = useDispatch();
   const nav = useNavigate()
-  const { mutate: login,error } = usePost<LoginData>("/auth/login")
+  const { mutate: login,error ,isPending} = usePostMutation<LoginData>("/auth/login")
 
   const onSubmit = (data: LoginFormDataType) => {
     login(data, {
@@ -44,6 +45,7 @@ export const LoginPage = () => {
 
   return (
     <Container>
+      {isPending && <Loading msg="Aguarde"/>}
       <FormContainer>
         <BannerContainer>
           <LogoBanner src={img} alt="Logo" />
@@ -59,7 +61,7 @@ export const LoginPage = () => {
           <Input type="password" placeholder="Sua senha" {...register("password")} />
 
           <Button type="submit" value="Entrar" />
-          <Link to={"/register"}>Não possui conta? Registre-se</Link>
+          <Link to={"/forgot-password"}>Não possui conta? Registre-se</Link>
         </Form>
       </FormContainer>
     </Container>

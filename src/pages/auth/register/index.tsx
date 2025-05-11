@@ -3,14 +3,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Container, FormContainer, Form, Title, } from "./style";
 import { registerFormSchema, registerFormType } from "../../../schemas/registerUser.schema";
-import { StepOne } from "./steps/stepOne";
-import { StepTwo } from "./steps/stepTwo";
-import { usePost } from "../../../services/usePost";
+import {  usePostMutation } from "../../../services/usePost";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../redux/slices/user/user";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "../../../components/load/register";
 import { ModalErro } from "../../../components/modal/erro";
+import { StepOne } from "./components/stepOne";
+import { StepTwo } from "./components/stepTwo";
 
 export const RegisterPage = () => {
   const [stepHidden, setStepHidden] = useState<"1" | "2">("1");
@@ -21,14 +21,14 @@ export const RegisterPage = () => {
     resolver: zodResolver(registerFormSchema),
   });
 
-  const { mutate: register, isPending, isError } = usePost<registerFormType>("/user/register")
+  const { mutate: register, isPending, isError } = usePostMutation<registerFormType>("/user/register")
 
   const onSubmit = (data: registerFormType) => {
     register(data, {
       onSuccess: (res) => {
         console.log("registro bem-sucedido:", res);
         dispatch(setUser(res));
-        nav("/subscription");
+        nav("/request-verify-account");
 
       },
       onError: (err: any) => {

@@ -5,7 +5,7 @@ import { UserState } from "./interfaces";
 
 const initialState: UserState = {
     id: null,
-	email: null,
+	email: "",
 	password: null,
 	name: null,
 	cnpj: null,
@@ -17,7 +17,8 @@ const initialState: UserState = {
 	currentPeriodEnd: null,
 	stripe_id:null,
 	stripe_connect_id: null,
-	token:null
+	token:null,
+	AccountVerification:false
 };
 
 const userSlice = createSlice({

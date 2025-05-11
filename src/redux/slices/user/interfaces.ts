@@ -1,6 +1,6 @@
 export interface UserState {
     id: string|null,
-	email: string|null,
+	email: string,
 	password: string|null,
 	name:string|null,
 	cnpj: string|null,
@@ -12,5 +12,6 @@ export interface UserState {
 	currentPeriodEnd: string|null,
 	stripe_id: string|null,
 	stripe_connect_id: string|null,
-	token: string|null
+	token: string|null,
+	AccountVerification:true|false
 }

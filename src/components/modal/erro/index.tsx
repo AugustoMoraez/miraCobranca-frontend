@@ -4,10 +4,11 @@ import { MdCancel } from "react-icons/md";
 type prop = {
     
     msg:string
+    func?:()=>null
 }
 
 
-export const ModalErro = ({msg}:prop) => {
+export const ModalErro = ({msg,func}:prop) => {
     const[toggle,setToggle] = useState<"block"|"none">("block")
     return(
         <Container display={toggle}>
@@ -16,7 +17,14 @@ export const ModalErro = ({msg}:prop) => {
                     <MdCancel/>
                     {msg}
                 </Msg>
-                <Button onClick={()=>setToggle("none")}>OK</Button>
+                <Button 
+                onClick={()=>
+                    {
+                    setToggle("none");
+                    func&&func()
+                    }}>
+                    OK
+                </Button>
             </Modal>
         </Container>
     )

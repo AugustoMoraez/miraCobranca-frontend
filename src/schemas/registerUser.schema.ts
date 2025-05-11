@@ -18,12 +18,25 @@ const cpfValidator = (cpf: string) => {
   return digits[9] === firstCheckDigit && digits[10] === secondCheckDigit;
 };
 
-export const cpf = z.string().refine(cpfValidator, {
+export const cpf = z.string(
+).regex(/^\d{11}$/, { message: 'Deve conter 11 dígitos numéricos(numeros somente))' }
+).refine(cpfValidator, {
   message: 'CPF inválido',
 });
 
 
-
+export const passwordSchema = z.string()
+  .min(8, { message: 'A senha deve ter pelo menos 8 caracteres' })
+  .refine((val) => /[a-z]/.test(val), {
+    message: 'A senha deve conter pelo menos uma letra minúscula',
+  })
+  .refine((val) => /[A-Z]/.test(val), {
+    message: 'A senha deve conter pelo menos uma letra maiúscula',
+  })
+  .refine((val) => /\d/.test(val), {
+    message: 'A senha deve conter pelo menos um número',
+  })
+  
  
 export const AddressSchema = z.object({
   house_number: z.string().min(1, 'O número da casa é obrigatório'),
@@ -36,7 +49,7 @@ export const AddressSchema = z.object({
  
 export const registerFormSchema = z.object({
   email: z.string().email('O e-mail deve ser válido').min(1, 'O e-mail é obrigatório'),
-  password: z.string().min(6, 'A senha deve ter no mínimo 6 caracteres'),
+  password: passwordSchema,
   confirmEmail: z.string().email("Email inválido"),
   confirmPassword: z.string().min(6, "Mínimo 6 caracteres"),
   name: z.string().min(2,"Nome obrigatório"),
