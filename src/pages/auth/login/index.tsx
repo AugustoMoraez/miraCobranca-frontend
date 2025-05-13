@@ -61,7 +61,8 @@ export const LoginPage = () => {
           <Input type="password" placeholder="Sua senha" {...register("password")} />
 
           <Button type="submit" value="Entrar" />
-          <Link to={"/forgot-password"}>Não possui conta? Registre-se</Link>
+          <Link to={"/register"}>Registre-se aqui</Link>
+          <Link to={"/forgot-password"}>Esqueceu sua senha?</Link>
         </Form>
       </FormContainer>
     </Container>

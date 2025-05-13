@@ -3,7 +3,7 @@ import { Container, Wrapper } from "./style";
 import { useEffect } from "react";
 import { usePostAuto } from "../../../../services/usePost";
 import { Loading } from "../../../../components/load/register";
-import { ModalErro } from "../../../../components/modal/erro";
+import { ModalMsg } from "../../../../components/modal/msg";
 
 
 export const VerifyAccountPage = () => {
@@ -20,7 +20,7 @@ export const VerifyAccountPage = () => {
         <Container>
 
             {isPending && <Loading msg="Aguarde" />}
-            {isError && <ModalErro msg={"Houve algum erro tente novamente"} />}
+            {isError && <ModalMsg msg={"Houve algum erro tente novamente"} />}
             {isSuccess &&
                 <Wrapper>
                     <h2>Sua conta foi verificada com sucesso!</h2>

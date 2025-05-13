@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../../redux/slices/user/user";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "../../../components/load/register";
-import { ModalErro } from "../../../components/modal/erro";
+import { ModalMsg } from "../../../components/modal/msg";
 import { StepOne } from "./components/stepOne";
 import { StepTwo } from "./components/stepTwo";
 
@@ -42,7 +42,7 @@ export const RegisterPage = () => {
   return (
     <>
       {isPending && <Loading msg="Registrando" />}
-      {isError && <ModalErro msg={msgErro} />}
+      {isError && <ModalMsg msg={msgErro} />}
       <Container>
         <Title>
           {stepHidden == "1" ? "Registro de conta" : "Endereço"}

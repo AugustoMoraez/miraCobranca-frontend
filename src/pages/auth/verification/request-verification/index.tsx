@@ -3,7 +3,7 @@ import { Container,Wrapper } from "./style";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../redux/store";
 import { Loading } from "../../../../components/load/register";
-import { ModalErro } from "../../../../components/modal/erro";
+import { ModalMsg } from "../../../../components/modal/msg";
 import { usePostMutation } from "../../../../services/usePost";
 import { useEffect } from "react";
 
@@ -30,7 +30,7 @@ export const RequestVerifyAccountPage = () => {
 
 
             {isPending && <Loading msg="Aguarde" />}
-            {isError && <ModalErro msg={"Houve algum erro tente novamente"} />}
+            {isError && <ModalMsg msg={"Houve algum erro tente novamente"} />}
             {isSuccess ?
                 <Wrapper>
                     <p>Enviado com sucesso! <br /> Acesse o link que enviamos para o email: <br /> <b>{email}</b> <br /></p>

@@ -47,6 +47,7 @@ export const Form = styled.form`
   border-bottom-right-radius: 10px;
   border-top-right-radius:10px;
   a{
+    font-size: 12px;
     color: #fff;
   }
 `
@@ -87,7 +88,7 @@ export const Button = styled.input`
   outline: none;
   border: 1px solid #1E7A58;
   color: #fff;
-
+  text-align:center;
   
   &:hover{
     opacity: 0.9;

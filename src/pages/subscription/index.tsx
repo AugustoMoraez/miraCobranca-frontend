@@ -5,7 +5,7 @@ import { FaRegUser } from "react-icons/fa6";
 import { TbDiscount } from "react-icons/tb";
 import { JSX, useEffect } from "react";
 import { Loading } from "../../components/load/register";
-import { ModalErro } from "../../components/modal/erro";
+import { ModalMsg } from "../../components/modal/msg";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
@@ -52,7 +52,7 @@ export const SubscriptionPage = () => {
   return (
     <>
       {isPending && <Loading msg="Aguarde" />}
-      {isError && <ModalErro msg="URL não obtida" />}
+      {isError && <ModalMsg msg="URL não obtida" />}
 
       <Container>
         <Card>
