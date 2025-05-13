@@ -36,6 +36,8 @@ export const passwordSchema = z.string()
   .refine((val) => /\d/.test(val), {
     message: 'A senha deve conter pelo menos um número',
   })
+
+  export type passwordType = z.infer<typeof passwordSchema>
   
  
 export const AddressSchema = z.object({

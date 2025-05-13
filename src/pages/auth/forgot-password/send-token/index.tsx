@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Button, Container, Form, Input, Shape, Shape2, Title } from "./style"
+import { Button, Container, Form, Input, Shape, Shape2, Title } from "../style"
 import { GrSend } from "react-icons/gr";
 import { usePostMutation } from "../../../../services/usePost";
 import { useForm } from "react-hook-form";
@@ -23,7 +23,7 @@ export const ForgotPasswordPage = () => {
     const onSubmit = ({ email }: formType) => {
         requestToken({ email }, {
             onError: (error: any) => {
-                const responseMessage = error?.response?.data?.msg;
+                const responseMessage = error?.response?.data?.message;
                 const fallbackMessage = error.message || 'Erro desconhecido';
                 setErrMsg(responseMessage || fallbackMessage);
                 console.log(error)
