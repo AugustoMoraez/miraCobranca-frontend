@@ -11,21 +11,25 @@ export const Container = styled.div`
  
 `
 export const FormContainer = styled.div`
-display: flex;
-width: 100%;
-max-width: 900px;
-height: 500px;
-background-color: #FCFAF7;
-box-shadow: 5px 5px 20px #333;
-border-radius: 10px;
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  height: 500px;
+  background-color: #FCFAF7;
+  box-shadow: 5px 5px 20px #333;
+  border-radius: 10px;
 `
 export const BannerContainer = styled.div`
-height: 100%;
-width: 50%;
- display: flex;
- justify-content: center;
- align-items: center;
- flex-direction: column;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  @media (max-width:570px) {
+      display: none;
+  }
 
 `
 export const LogoBanner = styled.img`
@@ -49,6 +53,10 @@ export const Form = styled.form`
   a{
     font-size: 12px;
     color: #fff;
+  }
+  @media (max-width:570px) {
+    width: 100%;
+    border-radius: 10px;
   }
 `
 export const TitleForm = styled.h1`

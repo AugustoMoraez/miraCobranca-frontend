@@ -1,17 +1,18 @@
 import { UseFormReturn } from "react-hook-form";
-import {   FormStep, Input, SpanErro, Label, NextButton } from "../style";
+import {   FormStep, Input,  Label, NextButton } from "../style";
 import { registerFormType } from "../../../../schemas/registerUser.schema";
+import { SpanErro } from "../../../../components/globalComponents";
  
 
 
-type StepOneData = {
+type prop = {
     formHooK: UseFormReturn<registerFormType>,
     stepHidden: "1" | "2",
     func:(step:"1"|"2")=>void
 }
 
 
-export const StepOne = ({formHooK,stepHidden,func}:StepOneData) => {
+export const StepOne = ({formHooK,stepHidden,func}:prop) => {
      
     const {
         register,

@@ -170,11 +170,4 @@ export const BackForm = styled.p`
   color:#1E7A58;
   font-weight: bold;
 `;
-
- export const SpanErro = styled.p`
-  margin: 5px auto;
-   
-  font-size:12px ;
-  color:rgb(255, 101, 101);
-
-  `
+ 

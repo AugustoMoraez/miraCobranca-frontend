@@ -1,16 +1,17 @@
 import { UseFormReturn } from "react-hook-form";
-import {BackForm, FormStep, Input, InputOption, Label,  Option, SpanErro, SubmitButton } from "../style";
+import {BackForm, FormStep, Input, InputOption, Label,  Option,  SubmitButton } from "../style";
 import { registerFormType } from "../../../../schemas/registerUser.schema";
 import { states } from "../../../../utils/states";
+import { SpanErro } from "../../../../components/globalComponents";
 
-type StepOneData = {
+type prop = {
     formHooK: UseFormReturn<registerFormType>,
     stepHidden: "1" | "2",
     func: () => void
 }
 
 
-export const StepTwo = ({ formHooK, stepHidden, func }: StepOneData) => {
+export const StepTwo = ({ formHooK, stepHidden, func }: prop) => {
     
     const {
         register,
@@ -20,19 +21,19 @@ export const StepTwo = ({ formHooK, stepHidden, func }: StepOneData) => {
     return (
         <FormStep className={stepHidden == "1" ? "hidden" : ""}>
             <BackForm onClick={() =>func()}>Voltar</BackForm>
+            
             <Label htmlFor="state-option">Estado</Label>
             <InputOption 
             id="state-options" 
             defaultValue={"MA"} 
             {...register('address.state')}>
-
                 {
                     states.map((item) => (
                         <Option value={item}  key={item}>{item}</Option>
                     ))
                 }
-
             </InputOption>
+
             <Label htmlFor="cidade">Cidade</Label>
             <Input type="text" id="cidade" placeholder="Cidade" {...register("address.city")} />
             {errors.address?.city && <SpanErro>{errors.address?.city.message}</SpanErro>}

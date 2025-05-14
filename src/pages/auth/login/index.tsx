@@ -7,15 +7,11 @@ import { Link, useNavigate } from "react-router-dom"
 import { usePostMutation } from "../../../services/usePost"
 import { useDispatch } from "react-redux"
 import { setUser } from "../../../redux/slices/user/user"
-import { SpanErro } from "../register/style"
 import { Loading } from "../../../components/load/register"
+import { SpanErro } from "../../../components/globalComponents"
 
  
-type LoginData = {
-  email: string
-  password: string
-}
-
+ 
 export const LoginPage = () => {
   const {
     register,
@@ -27,12 +23,11 @@ export const LoginPage = () => {
 
   const dispatch = useDispatch();
   const nav = useNavigate()
-  const { mutate: login,error ,isPending} = usePostMutation<LoginData>("/auth/login")
+  const { mutate: login,error ,isPending} = usePostMutation<LoginFormDataType>("/auth/login")
 
   const onSubmit = (data: LoginFormDataType) => {
     login(data, {
       onSuccess: (res) => {
-        console.log("Login bem-sucedido:", res)
         dispatch(setUser(res))
         nav("/dashboard")  
       },
@@ -61,6 +56,7 @@ export const LoginPage = () => {
           <Input type="password" placeholder="Sua senha" {...register("password")} />
 
           <Button type="submit" value="Entrar" />
+
           <Link to={"/register"}>Registre-se aqui</Link>
           <Link to={"/forgot-password"}>Esqueceu sua senha?</Link>
         </Form>

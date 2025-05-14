@@ -8,7 +8,8 @@ import { GrSend } from "react-icons/gr";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchema, formType } from "./schema/schema";
-import { SpanErro } from "../../register/style";
+import { SpanErro } from "../../../../components/globalComponents";
+ 
 
 export const ResetPasswordPage = () => {
     const [errMsg, setErrMsg] = useState("")

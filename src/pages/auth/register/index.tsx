@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Container, FormContainer, Form, Title, } from "./style";
 import { registerFormSchema, registerFormType } from "../../../schemas/registerUser.schema";
-import {  usePostMutation } from "../../../services/usePost";
+import { usePostMutation } from "../../../services/usePost";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../redux/slices/user/user";
 import { useNavigate } from "react-router-dom";
@@ -26,13 +26,11 @@ export const RegisterPage = () => {
   const onSubmit = (data: registerFormType) => {
     register(data, {
       onSuccess: (res) => {
-        console.log("registro bem-sucedido:", res);
         dispatch(setUser(res));
         nav("/request-verify-account");
 
       },
       onError: (err: any) => {
-        console.error("Erro no registro:", err.response?.data?.message);
         setStepHidden("1");
         setMsgErro(err.response?.data?.message || "Erro interno: Tente novamente mais tarde");
       },

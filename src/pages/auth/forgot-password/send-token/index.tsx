@@ -5,10 +5,10 @@ import { usePostMutation } from "../../../../services/usePost";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchema, formType } from "./schema/schema";
-import { SpanErro } from "../../register/style";
 import { ModalMsg } from "../../../../components/modal/msg";
 import { Loading } from "../../../../components/load/register";
 import { useState } from "react";
+import { SpanErro } from "../../../../components/globalComponents";
 
 export const ForgotPasswordPage = () => {
     const [errMsg, setErrMsg] = useState("")
@@ -26,7 +26,6 @@ export const ForgotPasswordPage = () => {
                 const responseMessage = error?.response?.data?.message;
                 const fallbackMessage = error.message || 'Erro desconhecido';
                 setErrMsg(responseMessage || fallbackMessage);
-                console.log(error)
             }
         })
     };

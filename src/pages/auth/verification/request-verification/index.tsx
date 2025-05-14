@@ -16,7 +16,6 @@ export const RequestVerifyAccountPage = () => {
         requestToken({email},{
             onSuccess:(res)=>{
                 setTimeout(() => {
-                    console.log(res)
                     nav("/");
                   }, 10000);
             }
