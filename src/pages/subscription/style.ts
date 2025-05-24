@@ -3,10 +3,11 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     background-color:rgb(235, 235, 235);
-    height: 100vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     
  
 `
@@ -37,19 +38,20 @@ export const Caption = styled.h2`
 export const Item = styled.div`
     color: #0D4937;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
  
 `
 export const Content = styled.p`
    font-weight:500;
+   margin-right: auto;
  
 `
 export const Icon = styled.div`
-  padding-right: 20px;
-  height: 40px;
+  padding-right: 10px;
+  height: 30px;
    svg{
-     font-size: 40px;
+     font-size: 30px;
    }
  
 `

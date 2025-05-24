@@ -1,7 +1,6 @@
 import { useMutation } from "@tanstack/react-query"
 import { api } from "./axiosInstancy"
 import { useEffect } from "react"
-
  
 
 export const usePostMutation = <T>(path:string) => {
@@ -30,3 +29,5 @@ export const usePostAuto = <T, R = any>(path: string, data: T) => {
 
   return mutation;
 };
+
+

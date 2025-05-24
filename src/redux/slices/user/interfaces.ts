@@ -10,6 +10,7 @@ export interface UserState {
 	subscription_Status: string | null,
 	subscription_id: string|null,
 	currentPeriodEnd: string|null,
+	plan:"BASIC"|"PRO"|"PREMIUM"| "NULL",
 	stripe_id: string|null,
 	stripe_connect_id: string|null,
 	token: string|null,
