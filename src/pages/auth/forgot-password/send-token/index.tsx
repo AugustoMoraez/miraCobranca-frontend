@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button, Container, Form, Input, Shape, Shape2, Title } from "../style"
 import { GrSend } from "react-icons/gr";
-import { usePostMutation } from "../../../../services/usePost";
+import { usePostMutation } from "../../../../services/hooks/usePost";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchema, formType } from "./schema/schema";

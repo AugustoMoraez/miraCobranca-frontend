@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query"
-import { api } from "./axiosInstancy"
+import { api } from "../axiosInstancy"
 import { useEffect } from "react"
  
 

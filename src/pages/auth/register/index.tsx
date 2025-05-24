@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Container, FormContainer, Form, Title, } from "./style";
 import { registerFormSchema, registerFormType } from "../../../schemas/registerUser.schema";
-import { usePostMutation } from "../../../services/usePost";
+import { usePostMutation } from "../../../services/hooks/usePost";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../redux/slices/user/user";
 import { useNavigate } from "react-router-dom";

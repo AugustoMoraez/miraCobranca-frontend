@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../../redux/store";
 import { Loading } from "../../../../components/load/register";
 import { ModalMsg } from "../../../../components/modal/msg";
-import { usePostMutation } from "../../../../services/usePost";
+import { usePostMutation } from "../../../../services/hooks/usePost";
 import { useEffect } from "react";
 
 

@@ -1,7 +1,6 @@
-
 import { useQuery } from "@tanstack/react-query";
 import { api } from "./axiosInstancy";
-import { useState } from "react";
+
 
 export const useGet = <T>(path: string) => {
   return useQuery({

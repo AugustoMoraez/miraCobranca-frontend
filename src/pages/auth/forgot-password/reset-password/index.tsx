@@ -1,6 +1,6 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { usePostMutation } from "../../../../services/usePost";
+import { usePostMutation } from "../../../../services/hooks/usePost";
 import { Loading } from "../../../../components/load/register";
 import { ModalMsg } from "../../../../components/modal/msg";
 import { Button, Container, Form, Input, Title } from "../style"
