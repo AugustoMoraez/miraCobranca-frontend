@@ -33,12 +33,12 @@ const userSlice = createSlice({
 		setUser: (state, action: PayloadAction<UserState>) => {
 			Object.assign(state, action.payload);
 			localStorage.setItem("user", JSON.stringify(action.payload));
-			localStorage.setItem("token", action.payload.token ?? "");
+			// localStorage.setItem("token", action.payload.token ?? "");
 		},
 		clearUser: (state) => {
 			Object.assign(state, initialState);
 			localStorage.removeItem("user");
-			localStorage.removeItem("token");
+			// localStorage.removeItem("token");
 		}
 
 	},

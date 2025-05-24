@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { api } from "./axiosInstancy";
+import { api } from "../axiosInstancy";
 
 
 export const useGet = <T>(path: string) => {
