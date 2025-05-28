@@ -20,9 +20,9 @@ export const Aside = () => {
             <Container isOpen={isOpen}>
                 <Menu>
                     {
-                        AsideData.map((item) => (
+                        AsideData.map((item,index) => (
                             <MenuItem>
-                                <NavLink to={item.link}>
+                                <NavLink to={item.link} key={index}>
                                     <IconWrapper>{item.icon}</IconWrapper>
                                     {isOpen && <MenuText>{item.MenuText}</MenuText>}
                                 </NavLink>
