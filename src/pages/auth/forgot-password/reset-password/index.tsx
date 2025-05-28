@@ -2,7 +2,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { usePostMutation } from "../../../../services/hooks/usePost";
 import { Loading } from "../../../../components/load/register";
-import { ModalMsg } from "../../../../components/modal/msg";
+import { ModalMsg } from "../../../../components/ModalMsg";
 import { Button, Container, Form, Input, Title } from "../style"
 import { GrSend } from "react-icons/gr";
 import { useForm } from "react-hook-form";

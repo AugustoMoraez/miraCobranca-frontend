@@ -5,7 +5,7 @@ import { usePostMutation } from "../../../../services/hooks/usePost";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchema, formType } from "./schema/schema";
-import { ModalMsg } from "../../../../components/modal/msg";
+import { ModalMsg } from "../../../../components/ModalMsg";
 import { Loading } from "../../../../components/load/register";
 import { useState } from "react";
 import { SpanErro } from "../../../../components/globalComponents";

@@ -3,7 +3,7 @@ import { Container,Wrapper } from "./style";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../redux/store";
 import { Loading } from "../../../../components/load/register";
-import { ModalMsg } from "../../../../components/modal/msg";
+import { ModalMsg } from "../../../../components/ModalMsg";
 import { usePostMutation } from "../../../../services/hooks/usePost";
 import { useEffect } from "react";
 

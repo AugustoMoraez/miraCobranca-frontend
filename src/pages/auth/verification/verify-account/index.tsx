@@ -3,7 +3,7 @@ import { Container, Wrapper } from "./style";
 import { useEffect } from "react";
 import { usePostAuto } from "../../../../services/hooks/usePost";
 import { Loading } from "../../../../components/load/register";
-import { ModalMsg } from "../../../../components/modal/msg";
+import { ModalMsg } from "../../../../components/ModalMsg";
 
 
 export const VerifyAccountPage = () => {

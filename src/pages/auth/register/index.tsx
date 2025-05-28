@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../../redux/slices/user/user";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "../../../components/load/register";
-import { ModalMsg } from "../../../components/modal/msg";
+import { ModalMsg } from "../../../components/ModalMsg";
 import { StepOne } from "./components/stepOne";
 import { StepTwo } from "./components/stepTwo";
 
