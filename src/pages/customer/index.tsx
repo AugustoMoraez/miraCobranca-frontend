@@ -1,6 +1,8 @@
+import { PageContent,Container } from "../../AppStyle"
 import { Aside } from "../../components/aside"
+import { Header } from "../../components/header"
 import { PrivateRoute } from "../auth/components/privateRoute"
-import { Container } from "./style"
+ 
 
 
 export const CustomerPage = () => {
@@ -8,11 +10,16 @@ export const CustomerPage = () => {
 
     return (
         <PrivateRoute>
-            <Container>
-                <Aside/>
-                <p>Clientes</p>
+            <PageContent>
+                <Aside />
+                <Container>
+                    <Header title="Clientes" options={[
+                        { content: "+ Novo Cliente", func: () => console.log("Cliente") },
+                       
+                    ]} />
+                </Container>
 
-            </Container>
+            </PageContent>
         </PrivateRoute>
     )
 }

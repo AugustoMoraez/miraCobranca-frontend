@@ -1,6 +1,7 @@
+import { PageContent,Container } from "../../AppStyle"
 import { Aside } from "../../components/aside"
+import { Header } from "../../components/header"
 import { PrivateRoute } from "../auth/components/privateRoute"
-import { Container } from "./style"
 
 
 export const SignaturesPage = () => {
@@ -8,11 +9,16 @@ export const SignaturesPage = () => {
 
     return (
         <PrivateRoute>
-            <Container>
-                <Aside/>
-                <p>Assinatura</p>
+            <PageContent>
+                <Aside />
+                <Container>
+                    <Header title="Assinaturas" options={[
+                        { content: "+ Nova Assinatura", func: () => console.log("assomatira") },
 
-            </Container>
+                    ]} />
+                </Container>
+
+            </PageContent>
         </PrivateRoute>
     )
 }
