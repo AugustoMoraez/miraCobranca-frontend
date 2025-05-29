@@ -9,7 +9,6 @@ const initialState: UserState = savedUser
 	: {
 		id: null,
 		email: "",
-		password: null,
 		name: null,
 		cnpj: null,
 		cpf: null,
@@ -21,7 +20,6 @@ const initialState: UserState = savedUser
 		currentPeriodEnd: null,
 		stripe_id: null,
 		stripe_connect_id: null,
-		token: null,
 		AccountVerification: false,
 	};
 
@@ -33,12 +31,10 @@ const userSlice = createSlice({
 		setUser: (state, action: PayloadAction<UserState>) => {
 			Object.assign(state, action.payload);
 			localStorage.setItem("user", JSON.stringify(action.payload));
-			// localStorage.setItem("token", action.payload.token ?? "");
 		},
 		clearUser: (state) => {
 			Object.assign(state, initialState);
 			localStorage.removeItem("user");
-			// localStorage.removeItem("token");
 		}
 
 	},

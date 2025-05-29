@@ -16,7 +16,7 @@ export const SubscriptionPage = () => {
   const [clicked, setClick] = useState(false)
   const dispatch = useDispatch();
   const nav = useNavigate();
-  const { token, AccountVerification, stripe_id, subscription_Status } = useSelector((state: RootState) => state.user);
+  const { email, AccountVerification, stripe_id, subscription_Status } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     if (subscription_Status === "ACTIVE") {
@@ -24,10 +24,10 @@ export const SubscriptionPage = () => {
       return;
     }
 
-    if (!token || !AccountVerification) {
+    if (!email || !AccountVerification) {
       nav("/");
     }
-  }, [token, subscription_Status, AccountVerification, nav]);
+  }, [email, subscription_Status, AccountVerification, nav]);
 
 
 
