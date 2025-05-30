@@ -9,7 +9,9 @@ export const Overlay = styled.div`
   align-items: center;
   z-index: 999;
   padding: 16px;
+  overflow: auto;
 `;
+
 export const ModalWrapper = styled.div`
   background: white;
   border-radius: 8px;
@@ -18,8 +20,8 @@ export const ModalWrapper = styled.div`
   max-height: 90vh;
   overflow: auto;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  position: relative; /* necessário para posicionar CloseButton */
 `;
-
 
 export const CloseButton = styled.button`
   position: absolute;
@@ -30,13 +32,10 @@ export const CloseButton = styled.button`
   font-size: 24px;
   cursor: pointer;
   z-index: 1;
-  color: #fff;
+  color: #000;
 `;
 
 export const ContentWrapper = styled.div`
-  max-height: 90vh;
-  max-width: 90vw; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 16px;
+  display: block;
 `;

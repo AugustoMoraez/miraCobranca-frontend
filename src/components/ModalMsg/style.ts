@@ -11,6 +11,9 @@ export const Container = styled.div<prop>`
     height: 100vh;
     background-color: rgba(0,0,0,0.5);
     z-index: 99;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%,-50%);
 `;
 export const Modal = styled.div`
    

@@ -7,7 +7,7 @@ type prop = {
 export const Loading  = ( {msg}:prop) => {
   return (
     <Container>
-        <Loader><br /><br /><br /><br /><br />{msg}</Loader>  
+        <Loader><br /><br /><br /><br /><br /><p>{msg}</p></Loader>  
     </Container>
   );
 };
