@@ -9,6 +9,15 @@ export const Container = styled.form`
   gap: 12px;
   background-color: #fff;
   border-radius: 8px;
+
+  input{
+    
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+  }  
 `;
 
 export const Title = styled.h3`

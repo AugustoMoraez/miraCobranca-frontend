@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Container, Input, Label, SubmitButton, Title } from "./style";
+import { Container, Input, Label, SubmitButton, Title } from "../style";
 import { SpanErro } from "../../globalComponents";
 import { createCustomerSchema, createCustomerType } from "../../../schemas/createCustomer.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,7 +8,6 @@ import { usePostMutation } from "../../../services/hooks/usePost";
 import { Loading } from "../../load/register";
 import { ModalMsg } from "../../ModalMsg";
 import { useState } from "react";
-import { AxiosError } from "axios";
 
 
 
@@ -34,7 +33,7 @@ export const FormCreateCustomer = () => {
               },
               onError:(e:any)=>{
                 console.log(e)
-                setMsgError(e.response?.data?.message || "Erro interno: Tente novamente mais tarde");
+                setMsgError(e.response?.data?.message || "Erro interno: Tente novamente.");
               }
             });
     };
@@ -50,20 +49,25 @@ export const FormCreateCustomer = () => {
                 </Title>
                 <div>
                     <Label htmlFor="nome">Nome</Label>
-                    <Input id="nome"  type="text" placeholder="Digite o nome" {...register("name",{required:"Obrigatorio"})} required />
+                    <Input id="nome"  type="text" placeholder="Digite o nome." {...register("name",{required:"Obrigatorio"})} required />
                     {errors.name && <SpanErro>{errors.name.message}</SpanErro>}
                 </div>
 
                 <div>
                     <Label htmlFor="email">Email</Label>
-                    <Input id="email" type="email" placeholder="Digite o email" {...register("email",{required:"Obrigatorio"})}required />
+                    <Input id="email" type="email" placeholder="Digite o email." {...register("email",{required:"Obrigatorio"})}required />
                     {errors.email && <SpanErro>{errors.email.message}</SpanErro>}
                 </div>
 
                 <div>
                     <Label htmlFor="cpf">CPF</Label>
-                    <Input id="cpf" type="text" placeholder="Digite o CPF" {...register("cpf",{required:"Obrigatorio"})}required />
+                    <Input id="cpf" type="text" placeholder="Digite o CPF." {...register("cpf",{required:"Obrigatorio"})}required />
                     {errors.cpf && <SpanErro>{errors.cpf.message}</SpanErro>}
+                </div>
+                <div>
+                    <Label htmlFor="Telefone">Telefone</Label>
+                    <Input id="Telefone" type="text" placeholder="Digite o Telefone (Opcional)." {...register("phone",{required:"Obrigatorio"})}required />
+                    {errors.phone && <SpanErro>{errors.phone.message}</SpanErro>}
                 </div>
 
                 <SubmitButton type="submit">Criar</SubmitButton>
