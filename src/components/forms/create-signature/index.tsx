@@ -9,11 +9,14 @@ import { useState } from "react";
 import { createSignatureSchema, createSignatureType } from "../../../schemas/createSignature.schema";
 import { CiCreditCard1 } from "react-icons/ci";
 import { NumericFormat } from "react-number-format";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
 
 
 
 export const FormCreateSignature = () => {
-    const [msgError, setMsgError] = useState("Tente novamente")
+    const [msgModal, setMsgModal] = useState<{ msg: any, status: boolean }>({ msg: "Tente novamente depois", status: false })
+    const [inputDisable, setInputDisable] = useState(false)
     const {
         register,
         handleSubmit,
@@ -22,28 +25,36 @@ export const FormCreateSignature = () => {
     } = useForm<createSignatureType>({
         resolver: zodResolver(createSignatureSchema)
     });
-
-    const { mutate: registerSignature, isPending, isError } = usePostMutation<createSignatureType>("/customer")
+    const { stripe_connect_id } = useSelector((state: RootState) => state.user);
+    const { mutate: registerSignature, isPending, isError } = usePostMutation("/signature")
 
     const onSubmit = ({ description, name, unit_amount }: createSignatureType) => {
+        setInputDisable(true)
         console.log('Dados do cliente:', { description, name, unit_amount });
 
-        // registerSignature(data, {
-        //       onSuccess: (res) => {
-        //          console.log(res)
-
-        //       },
-        //       onError:(e:any)=>{
-        //         console.log(e)
-        //         setMsgError(e.response?.data?.message || "Erro interno: Tente novamente.");
-        //       }
-        //     });
+        registerSignature({
+            stripeAccount: stripe_connect_id,
+            name,
+            description,
+            unit_amount
+        }, {
+            onSuccess: (res) => {
+                console.log(res)
+                setMsgModal({ msg: "Criado com sucesso", status: true });
+                setInputDisable(false);
+            },
+            onError: (e: any) => {
+                console.log(e)
+                setMsgModal({ msg: e.response?.data?.message || "Erro interno: Tente novamente.", status: false });
+                setInputDisable(false);
+            }
+        });
     };
     return (
         <>
 
             {isPending && <Loading msg="Aguarde..." />}
-            {isError && <ModalMsg msg={msgError} />}
+            {isError && <ModalMsg msg={msgModal.msg} sucess={msgModal.status}/>}
             <Container onSubmit={handleSubmit(onSubmit)}>
                 <Title>
                     <CiCreditCard1 />
@@ -87,7 +98,7 @@ export const FormCreateSignature = () => {
                 </div>
 
 
-                <SubmitButton type="submit">Criar</SubmitButton>
+                <SubmitButton type="submit" disabled={inputDisable}>Criar</SubmitButton>
             </Container>
         </>
     );

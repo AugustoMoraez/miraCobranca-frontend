@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 type Prop = {
-	isOpen: boolean;
+	$isOpen: boolean;
 };
 export const Content = styled.div`
     background-color: #0A4634;
 	height: 100vh;
 `;
 export const Container = styled.aside<Prop>`
-	width: ${({ isOpen }) => (isOpen ? '220px' : '60px')};
+	width: ${({ $isOpen }) => ($isOpen ? '220px' : '60px')};
 	background-color: #0A4634;
 	color: white;
 	transition: width 0.3s ease;
@@ -18,7 +18,7 @@ export const Container = styled.aside<Prop>`
 
 export const ToggleButton = styled.button<Prop>`
 
-    width: ${({ isOpen }) => (isOpen ? '220px' : '60px')};
+    width: ${({ $isOpen }) => ($isOpen ? '220px' : '60px')};
     transition: ease-in-out 0.2s;
 	background-color: #0A4634;
 	color: white;

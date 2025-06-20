@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { usePostMutation } from "../../../services/hooks/usePost"
 import { useDispatch } from "react-redux"
 import { setUser } from "../../../redux/slices/user/user"
-import { Loading } from "../../../components/load/register"
+import { Loading } from "../../../components/load/default"
 import { SpanErro } from "../../../components/globalComponents"
 
  
@@ -40,7 +40,7 @@ export const LoginPage = () => {
 
   return (
     <Container>
-      {isPending && <Loading msg="Aguarde"/>}
+      {isPending && <Loading/>}
       <FormContainer>
         <BannerContainer>
           <LogoBanner src={img} alt="Logo" />

@@ -13,15 +13,15 @@ export const Aside = () => {
     return (
         <Content>
 
-            <ToggleButton isOpen={isOpen} onClick={toggleMenu}>
+            <ToggleButton $isOpen={isOpen} onClick={toggleMenu}>
                 <TiThMenu size={24} />
             </ToggleButton>
 
-            <Container isOpen={isOpen}>
+            <Container $isOpen={isOpen}>
                 <Menu>
                     {
                         AsideData.map((item,index) => (
-                            <MenuItem>
+                            <MenuItem key={index}>
                                 <NavLink to={item.link} key={index}>
                                     <IconWrapper>{item.icon}</IconWrapper>
                                     {isOpen && <MenuText>{item.MenuText}</MenuText>}
