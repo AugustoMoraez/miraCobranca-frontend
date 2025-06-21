@@ -6,7 +6,7 @@ import { FaCheckCircle } from "react-icons/fa";
 type prop = {
     sucess?:boolean,
     msg:string
-    func?:()=>null
+    func?:()=>void
 }
 
 export const ModalMsg = ({msg,func,sucess}:prop) => {

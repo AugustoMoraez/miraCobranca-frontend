@@ -2,22 +2,23 @@ import { useState } from "react";
 import { Container, Input, NoResults, Table, Td, Th } from "./style"
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-import { customer } from "../../../../schemas/customer.schema";
+import { customer } from "../../../../schemas/customer";
+import { useGetWithParams } from "../../../../services/hooks/useGet";
 
 
-type Props = {
-    data: customer[];
-};
+ 
 
 
-export const CustomerList = ({ data }: Props) => {
+export const CustomerList = () => {
     const [search, setSearch] = useState('');
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
     const limit = 10;
     const offset = page * limit;
 
-
-
+    const { data: list, isPending, isError } = useGetWithParams<{count:number,data:customer[]}>(
+    "/customer/all",
+    { page, limit: 10 });
+        console.log(list)
     return (
         <Container>
             <Input
@@ -38,9 +39,10 @@ export const CustomerList = ({ data }: Props) => {
                     </tr>
                 </thead>
                 <tbody>
+                     
                     {
 
-                      data &&  data.map((customer) => (
+                     list && list.data.map((customer) => (
                             <tr key={customer.id}>
                                 <Td>{customer.name}</Td>
                                 <Td>{customer.email}</Td>
@@ -58,10 +60,16 @@ export const CustomerList = ({ data }: Props) => {
                                 
                             </tr>
                         ))
+                    }  
+                    {
+                        list?.data.length === 0 && 
+                        <NoResults>
+                            <td colSpan={6} >Nenhum cliente</td>
+                        </NoResults>
                     }
-
                 </tbody>
             </Table>
         </Container>
     );
 };
+

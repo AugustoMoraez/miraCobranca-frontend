@@ -9,10 +9,12 @@ import { Loading } from "../../load/register";
 import { ModalMsg } from "../../ModalMsg";
 import { useState } from "react";
 
+type prop = {
+    func:()=>void
+}
 
-
-export const FormCreateCustomer = () => {
-    const [msgError,setMsgError] = useState("Tente novamente")
+export const FormCreateCustomer = ({func}:prop) => {
+    const [msgModal,setMsgModal] = useState("Tente novamente")
     const {
         register,
         handleSubmit,
@@ -21,19 +23,19 @@ export const FormCreateCustomer = () => {
         resolver:zodResolver(createCustomerSchema)
     });
 
-    const { mutate: registerCustomer, isPending, isError } = usePostMutation<createCustomerType>("/customer")
+    const { mutate: registerCustomer, isPending, isError,isSuccess } = usePostMutation<createCustomerType>("/customer")
 
     const onSubmit = (data: createCustomerType) => {
         console.log('Dados do cliente:', data);
         // Aqui você pode chamar sua API, ex: api.post('/clientes', data)
         registerCustomer(data, {
               onSuccess: (res) => {
-                 console.log(res)
-
+                setMsgModal("Cliente cadastrado");
+                
               },
               onError:(e:any)=>{
                 console.log(e)
-                setMsgError(e.response?.data?.message || "Erro interno: Tente novamente.");
+                setMsgModal(e.response?.data?.message || "Erro interno: Tente novamente.");
               }
             });
     };
@@ -41,7 +43,8 @@ export const FormCreateCustomer = () => {
         <>
         
             {isPending && <Loading msg="Aguarde..."/> }
-            {isError && <ModalMsg msg={msgError}/> }
+            {isError && <ModalMsg msg={msgModal}/> }
+            {isSuccess && <ModalMsg msg={msgModal} func={()=>func()} sucess/> }
             <Container onSubmit={handleSubmit(onSubmit)}>
                 <Title>
                     <LuUserRoundPlus />
