@@ -13,4 +13,5 @@
     userID: string;
     createdAt: Date;
     updatedAt: Date;
+    //subscription
 }

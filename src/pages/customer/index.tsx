@@ -26,12 +26,7 @@ export const CustomerPage = () => {
                         title="Clientes"
                         options={[{ content: "+ Novo Cliente", func: () => setModalCustomerOpen(true) }]}
                     />
-
-                     
-                   
-
                     <CustomerList/>
-                    
                 </Container>
             </PageContent>
         </PrivateRoute>

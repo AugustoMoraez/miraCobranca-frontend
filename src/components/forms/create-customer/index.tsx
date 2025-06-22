@@ -27,7 +27,6 @@ export const FormCreateCustomer = ({func}:prop) => {
 
     const onSubmit = (data: createCustomerType) => {
         console.log('Dados do cliente:', data);
-        // Aqui você pode chamar sua API, ex: api.post('/clientes', data)
         registerCustomer(data, {
               onSuccess: (res) => {
                 setMsgModal("Cliente cadastrado");

@@ -1,6 +1,9 @@
-criar toggle para e msg para quando criar customer com sucesso
-criar atualização automatica de lista ao criar o customer
-
+task:
+Editar cliente
+deletar cliente
+testar paginacao da tabela clientes
+criar modal de visualização de dados do cliente mais possiveis ações referentes a ele
+adicionar verificação/soliciatacao de dados cadastrais do cliente (link para receber dados bancarios/endereco etc...)
 
 cpfs:
 221.072.674-83

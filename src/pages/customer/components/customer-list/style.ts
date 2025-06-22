@@ -19,6 +19,12 @@ export const Input = styled.input`
 export const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
+  tbody>tr{
+    cursor: pointer;
+    &:hover{
+      opacity: 0.6;
+    }
+  }
 `;
 
 export const Th = styled.th`

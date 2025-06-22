@@ -6,70 +6,90 @@ import { customer } from "../../../../schemas/customer";
 import { useGetWithParams } from "../../../../services/hooks/useGet";
 
 
- 
+
 
 
 export const CustomerList = () => {
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const limit = 10;
-    const offset = page * limit;
+    const offset = (page - 1) * limit;
 
-    const { data: list, isPending, isError } = useGetWithParams<{count:number,data:customer[]}>(
-    "/customer/all",
-    { page, limit: 10 });
-        console.log(list)
+
+
+    const { data: list, isPending } = useGetWithParams<{ count: number, data: customer[] }>(
+        "test/customer/all",
+        { limit, offset });
+    console.log(list)
     return (
-        <Container>
-            <Input
-                type="text"
-                placeholder="Pesquisar por nome ou email"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-            />
-            <Table>
-                <thead>
-                    <tr>
-                        <Th>Nome</Th>
-                        <Th>Email</Th>
-                        <Th>Cpf</Th>
-                        <Th>Assinatura</Th>
-                        <Th>Status</Th>
-                        <Th>Ações</Th>
-                    </tr>
-                </thead>
-                <tbody>
-                     
-                    {
+        <>
 
-                     list && list.data.map((customer) => (
-                            <tr key={customer.id}>
-                                <Td>{customer.name}</Td>
-                                <Td>{customer.email}</Td>
-                                <Td>{customer.cpf}</Td>
-                                <Td>{customer.subscription_Status}</Td>
-                                <Td>{customer.subscription_Status === 'ACTIVE' ? 'Ativa' : 'Inativa'}</Td>
-                                <Td>
-                                    <button aria-label="Excluir cliente">
-                                        <MdDelete />
-                                    </button>
-                                    <button aria-label="Editar cliente">
-                                        <FaEdit />
-                                    </button>
-                                </Td>
-                                
-                            </tr>
-                        ))
-                    }  
+
+            <Container>
+                <Input
+                    type="text"
+                    placeholder="Pesquisar por nome ou email"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                />
+                <Table>
+                    <thead>
+                        <tr>
+                            <Th>Nome</Th>
+                            <Th>Cpf</Th>
+                            <Th>Assinatura</Th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {isPending &&
+                            <NoResults>
+                                <td colSpan={6} >Carregando...</td>
+                            </NoResults>}
+                        {
+
+                            list && list.data.map((customer) => (
+                                <tr key={customer.id}>
+                                    <Td>{customer.name}</Td>
+                                    <Td>{customer.cpf}</Td>
+                                    <Td>{"Plano não aderido"}</Td>
+                                </tr>
+                            ))
+                        }
+                        {
+                            list?.data.length === 0 &&
+                            <NoResults>
+                                <td colSpan={6} rowSpan={3} >Nenhum cliente</td>
+                            </NoResults>
+                        }
+                    </tbody>
                     {
-                        list?.data.length === 0 && 
-                        <NoResults>
-                            <td colSpan={6} >Nenhum cliente</td>
-                        </NoResults>
+                        list &&
+                        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1rem' }}>
+                            <button
+                                onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                                disabled={page === 1}
+                            >
+                                Anterior
+                            </button>
+
+                            <span>Página {page}</span>
+
+                            <button
+                                onClick={() =>
+                                    setPage((prev) =>
+                                        list.count > prev * limit ? prev + 1 : prev
+                                    )
+                                }
+                                disabled={list.count <= page * limit}
+                            >
+                                Próxima
+                            </button>
+                        </div>
                     }
-                </tbody>
-            </Table>
-        </Container>
+
+                </Table>
+            </Container>
+        </>
     );
 };
 
