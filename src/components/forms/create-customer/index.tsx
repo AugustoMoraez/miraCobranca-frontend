@@ -8,13 +8,17 @@ import { usePostMutation } from "../../../services/hooks/usePost";
 import { Loading } from "../../load/register";
 import { ModalMsg } from "../../ModalMsg";
 import { useState } from "react";
+import { Modal } from "../../modal"
 
-type prop = {
+ 
+type prop ={
+    toggle:boolean,
     func:()=>void
 }
 
-export const FormCreateCustomer = ({func}:prop) => {
+export const FormCreateCustomer = ({func,toggle}:prop) => {
     const [msgModal,setMsgModal] = useState("Tente novamente")
+   
     const {
         register,
         handleSubmit,
@@ -39,6 +43,9 @@ export const FormCreateCustomer = ({func}:prop) => {
             });
     };
     return (
+        <Modal isOpen={toggle} onClose={() => func()}>
+
+
         <>
         
             {isPending && <Loading msg="Aguarde..."/> }
@@ -75,5 +82,6 @@ export const FormCreateCustomer = ({func}:prop) => {
                 <SubmitButton type="submit">Criar</SubmitButton>
             </Container>
         </>
+        </Modal>
     );
 };

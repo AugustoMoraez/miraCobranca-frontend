@@ -10,22 +10,19 @@ import { CustomerList } from "./components/customer-list"
 
 export const CustomerPage = () => {
     const [modalCustomerOpen, setModalCustomerOpen] = useState(false);
-   
     
     return (
         <PrivateRoute>
             <PageContent>
-                
                 <Aside />
                 <Container>
-                    <Modal isOpen={modalCustomerOpen} onClose={() => setModalCustomerOpen(false)}>
-                        <FormCreateCustomer func={()=>setModalCustomerOpen(false)}/>
-                    </Modal>
-
+                    <FormCreateCustomer toggle={modalCustomerOpen} 
+                    func={()=> modalCustomerOpen ? setModalCustomerOpen(false):setModalCustomerOpen(true)}/>
+                   
                     <Header
-                        title="Clientes"
-                        options={[{ content: "+ Novo Cliente", func: () => setModalCustomerOpen(true) }]}
-                    />
+                    title="Clientes"
+                    options={[{ content: "+ Novo Cliente", func: () => setModalCustomerOpen(true) }]}/>
+                    
                     <CustomerList/>
                 </Container>
             </PageContent>

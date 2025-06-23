@@ -45,3 +45,11 @@ export const NoResults = styled.tr`
     color: #888;
   }
 `;
+
+export const Pagination = styled.div`
+  display: flex; 
+  justify-content: center; 
+  gap: 1rem;
+  margin-top: 1rem;
+  width: 200%;
+`;

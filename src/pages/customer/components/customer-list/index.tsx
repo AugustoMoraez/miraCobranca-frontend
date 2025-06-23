@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { Container, Input, NoResults, Table, Td, Th } from "./style"
-import { MdDelete } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
+import { Container, Input, NoResults, Pagination, Table, Td, Th } from "./style"
 import { customer } from "../../../../schemas/customer";
 import { useGetWithParams } from "../../../../services/hooks/useGet";
 
@@ -20,7 +18,6 @@ export const CustomerList = () => {
     const { data: list, isPending } = useGetWithParams<{ count: number, data: customer[] }>(
         "test/customer/all",
         { limit, offset });
-    console.log(list)
     return (
         <>
 
@@ -51,7 +48,7 @@ export const CustomerList = () => {
                                 <tr key={customer.id}>
                                     <Td>{customer.name}</Td>
                                     <Td>{customer.cpf}</Td>
-                                    <Td>{"Plano não aderido"}</Td>
+                                    <Td>{"Sem plano"}</Td>
                                 </tr>
                             ))
                         }
@@ -64,7 +61,7 @@ export const CustomerList = () => {
                     </tbody>
                     {
                         list &&
-                        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1rem' }}>
+                        <Pagination>
                             <button
                                 onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
                                 disabled={page === 1}
@@ -84,7 +81,7 @@ export const CustomerList = () => {
                             >
                                 Próxima
                             </button>
-                        </div>
+                        </Pagination>
                     }
 
                 </Table>
