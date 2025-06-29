@@ -42,6 +42,7 @@ export const FormCreateCustomer = ({func,toggle}:prop) => {
               }
             });
     };
+   
     return (
         <Modal isOpen={toggle} onClose={() => func()}>
 

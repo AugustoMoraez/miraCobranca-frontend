@@ -46,7 +46,7 @@ export const NoResults = styled.tr`
   }
 `;
 
-export const Pagination = styled.div`
+export const Pagination = styled.tr`
   display: flex; 
   justify-content: center; 
   gap: 1rem;
