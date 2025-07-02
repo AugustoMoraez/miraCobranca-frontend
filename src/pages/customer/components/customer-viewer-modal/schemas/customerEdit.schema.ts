@@ -7,7 +7,7 @@ export const customerEditSchema = z.object({
     email: z.string().email("Email inválido"),
     cpf:cpf,
     phone: z.string().max(20,"maximo de caracteres é 20.").optional(),
-    address:z.string().optional()
+    address:z.string().min(1).max(40).optional()
 })
 
 export type customerEditType  = z.infer<typeof customerEditSchema>

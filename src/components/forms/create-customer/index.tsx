@@ -30,20 +30,16 @@ export const FormCreateCustomer = ({func,toggle}:prop) => {
     const { mutate: registerCustomer, isPending, isError,isSuccess,reset } = usePostMutation<createCustomerType>("/customer")
 
     const onSubmit = (data: createCustomerType) => {
-        console.log('Dados do cliente:', data);
         registerCustomer(data, {
-              onSuccess: (res) => {
-                 
+            onSuccess: (res) => {
+                console.log('Dados do cliente:', res);
                 setMsgModal("Cliente cadastrado");
                 func()
-                reset()
-                 
+                reset()  
               },
               onError:(e:any)=>{
-                console.log(e)
+                console.log({Erro_aqui:e})
                 setMsgModal(e.response?.data?.message || "Erro interno: Tente novamente.");
-                func()
-                reset()
               }
             });
     };
