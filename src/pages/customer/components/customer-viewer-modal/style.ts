@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 
 export const Container = styled.div``;
 
-export const ModalContainer = styled.form`
+export const ModalContainer = styled.div`
   background-color: #fff;
   border-radius: 16px;
   padding: 2rem;
@@ -18,16 +18,6 @@ export const Title = styled.h2`
   margin-bottom: 1.5rem;
 `;
 
-export const CloseButton = styled.button`
-  position: absolute;
-  top: 1.2rem;
-  right: 1.2rem;
-  background: transparent;
-  border: none;
-  font-size: 1.2rem;
-  color: #333;
-  cursor: pointer;
-`;
 
 export const InputGroup = styled.div`
   display: flex;
@@ -72,14 +62,16 @@ export const InfoRow = styled.div`
 export const Actions = styled.div`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   margin-top: 2rem;
   gap: 1rem;
 `;
 
-export const Button = styled.button<{ variant?: 'primary' | 'outline' }>`
+export const Button1 = styled.div<{ variant?: 'primary' | 'outline' }>`
   padding: 0.6rem 1.2rem;
   border-radius: 24px;
   font-weight: 500;
+  text-align: center;
   font-size: 1rem;
   cursor: pointer;
   border: ${({ variant }) =>
@@ -93,3 +85,41 @@ export const Button = styled.button<{ variant?: 'primary' | 'outline' }>`
     opacity: 0.9;
   }
 `;
+export const Edit = styled.div<{ $variant?: string }>`
+   padding: 0.6rem 1.2rem;
+  border-radius: 24px;
+  font-weight: 500;
+  text-align: center;
+  font-size: 1rem;
+  cursor: pointer;
+  border: ${({ $variant }) =>
+    $variant === 'outline' ? '2px solid #0A4634' : 'none'};
+  background-color: ${({ $variant }) =>
+    $variant === 'outline' ? '#fff' : '#0A4634'};
+  color: ${({ $variant }) =>
+    $variant === 'outline' ? '#0A4634' : '#fff'};
+
+  &:hover {
+    opacity: 0.9;
+  }
+`;
+export const Save = styled.input<{ $variant?: string }>`
+  padding: 0.6rem 1.2rem;
+  border-radius: 24px;
+  font-weight: 500;
+  text-align: center;
+  font-size: 1rem;
+  cursor: pointer;
+  border: ${({ $variant }) =>
+    $variant === 'outline' ? '2px solid #0A4634' : 'none'};
+  background-color: ${({ $variant }) =>
+    $variant === 'outline' ? '#fff' : '#0A4634'};
+  color: ${({ $variant }) =>
+    $variant === 'outline' ? '#0A4634' : '#fff'};
+
+  &:hover {
+    opacity: 0.9;
+  }
+   
+`;
+

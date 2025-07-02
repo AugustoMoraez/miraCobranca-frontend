@@ -1,7 +1,9 @@
 task:
 editar visual da tabela e dos botoes de paginacao[feito]
 criar mecanismo de busca na tabela clientes por nome e cpf
-Editar cliente
+Editar cliente[progresso]
+    modal criado ja puxando dados salvos no banco de dados[feito]
+    criar load e msg de erro[criando...]
 deletar cliente
 testar paginacao da tabela clientes[feito]
 finalizar paginacao na parte do frontend

@@ -23,7 +23,7 @@ export const cpf = z.string(
 ).refine(cpfValidator, {
   message: 'CPF inválido',
 });
-
+export type cpfType = z.infer<typeof cpf>
 
 export const passwordSchema = z.string()
   .min(8, { message: 'A senha deve ter pelo menos 8 caracteres' })

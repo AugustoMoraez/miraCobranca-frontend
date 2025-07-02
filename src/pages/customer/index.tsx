@@ -17,11 +17,11 @@ export const CustomerPage = () => {
                 <Aside />
                 <Container>
                     <FormCreateCustomer toggle={modalCustomerOpen} 
-                    func={()=> modalCustomerOpen ? setModalCustomerOpen(false):setModalCustomerOpen(true)}/>
+                    func={()=> setModalCustomerOpen(!modalCustomerOpen)}/>
                    
                     <Header
                     title="Clientes"
-                    options={[{ content: "+ Novo Cliente", func: () => setModalCustomerOpen(true) }]}/>
+                    options={[{ content: "+ Novo Cliente", func: () => setModalCustomerOpen(!modalCustomerOpen) }]}/>
                     
                     <CustomerList/>
                 </Container>

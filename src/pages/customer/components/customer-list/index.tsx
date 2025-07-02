@@ -1,11 +1,8 @@
 import { useState } from "react";
 import { Container, Input, NoResults, Pagination, Table, Td, Th } from "./style"
-import { customer } from "../../../../schemas/customer";
+import { customer } from "../../../../schemas/customerSchema";
 import { useGetWithParams } from "../../../../services/hooks/useGet";
 import { CustomerViewerModal } from "../customer-viewer-modal";
-
-
-
 
 
 export const CustomerList = () => {
@@ -16,30 +13,30 @@ export const CustomerList = () => {
     const limit = 10;
     const offset = (page - 1) * limit;
 
-    
-    const { data: list, isPending } = useGetWithParams<{ count: number, data: customer[] }>(
-        "/customer/all",
-        { limit, offset,search  });
-        
-    
 
-    const handleModal = (id:String) => {
-        const customer = list?.data.filter((c)=>c.id=== id)
-        if(customer){
-            setModalData(customer[0])
-            setToggleModal(true)
+    const { data: list, isPending,refetch } = useGetWithParams<{ count: number, data: customer[] }>(
+        "/customer/all",
+        { limit, offset, search }
+    );
+
+    const handleModal = (id: string) => {
+        const customer = list?.data.find((c) => String(c.id) === id);
+        if (customer) {
+            setModalData(customer);
+            setToggleModal(true);
         }
-    }
-    
+    };
+
     return (
         <>
-        {
-            modalData &&
-            <CustomerViewerModal  
-            toggle={toggleModal} 
-            func={()=> toggleModal ? setToggleModal(false): setToggleModal(true)} 
-            data={modalData} />
-        }
+            {modalData && (
+                    <CustomerViewerModal
+                        key={modalData.id}
+                        toggle={toggleModal}
+                        func={() => setToggleModal(false)}
+                        data={modalData}
+                        refetchList={()=>refetch()}
+                    />)}
             <Container>
                 <Input
                     type="text"
@@ -63,7 +60,7 @@ export const CustomerList = () => {
                         {
 
                             list && list.data.map((customer) => (
-                                <tr key={customer.id} onClick={()=>handleModal(customer.id)}>
+                                <tr key={customer.id} onClick={() => handleModal(customer.id)}>
                                     <Td>{customer.name}</Td>
                                     <Td>{customer.cpf}</Td>
                                     <Td>{"Sem plano"}</Td>
@@ -78,30 +75,30 @@ export const CustomerList = () => {
                         }
                     </tbody>
                 </Table>
-                    {
-                        list && list.count > 1 &&
-                        <Pagination>
-                            <button
-                                onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-                                disabled={page === 1}
-                            >
-                                Anterior
-                            </button>
+                {
+                    list && list.count > 10 &&
+                    <Pagination>
+                        <button
+                            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                            disabled={page === 1}
+                        >
+                            Anterior
+                        </button>
 
-                            <span>Página {page}</span>
+                        <span>Página {page}</span>
 
-                            <button
-                                onClick={() =>
-                                    setPage((prev) =>
-                                        list.count > prev * limit ? prev + 1 : prev
-                                    )
-                                }
-                                disabled={list.count <= page * limit}
-                            >
-                                Próxima
-                            </button>
-                        </Pagination>
-                    }
+                        <button
+                            onClick={() =>
+                                setPage((prev) =>
+                                    list.count > prev * limit ? prev + 1 : prev
+                                )
+                            }
+                            disabled={list.count <= page * limit}
+                        >
+                            Próxima
+                        </button>
+                    </Pagination>
+                }
             </Container>
         </>
     );

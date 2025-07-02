@@ -46,10 +46,20 @@ export const NoResults = styled.tr`
   }
 `;
 
-export const Pagination = styled.tr`
+export const Pagination = styled.div`
   display: flex; 
   justify-content: center; 
   gap: 1rem;
   margin-top: 1rem;
-  width: 200%;
+  width: 100%;
+  button{
+    background-color: #264653;
+    color:#fff;
+    padding: 2px 5px;
+    border-radius: 3px;
+    &:hover{
+      opacity: 0.8;
+      cursor: pointer;
+    }
+  }
 `;

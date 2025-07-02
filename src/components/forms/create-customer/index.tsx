@@ -27,31 +27,36 @@ export const FormCreateCustomer = ({func,toggle}:prop) => {
         resolver:zodResolver(createCustomerSchema)
     });
 
-    const { mutate: registerCustomer, isPending, isError,isSuccess } = usePostMutation<createCustomerType>("/customer")
+    const { mutate: registerCustomer, isPending, isError,isSuccess,reset } = usePostMutation<createCustomerType>("/customer")
 
     const onSubmit = (data: createCustomerType) => {
         console.log('Dados do cliente:', data);
         registerCustomer(data, {
               onSuccess: (res) => {
+                 
                 setMsgModal("Cliente cadastrado");
-                
+                func()
+                reset()
+                 
               },
               onError:(e:any)=>{
                 console.log(e)
                 setMsgModal(e.response?.data?.message || "Erro interno: Tente novamente.");
+                func()
+                reset()
               }
             });
     };
    
     return (
-        <Modal isOpen={toggle} onClose={() => func()}>
+        <Modal isOpen={toggle} onClose={() => {func(),reset()}}>
 
 
         <>
         
             {isPending && <Loading msg="Aguarde..."/> }
             {isError && <ModalMsg msg={msgModal}/> }
-            {isSuccess && <ModalMsg msg={msgModal} func={()=>func()} sucess/> }
+            {isSuccess && <ModalMsg msg={msgModal} func={()=>{func(),reset()}} sucess/> }
             <Container onSubmit={handleSubmit(onSubmit)}>
                 <Title>
                     <LuUserRoundPlus />
